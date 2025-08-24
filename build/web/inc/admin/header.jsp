@@ -43,8 +43,8 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
     <div class="flex-1 inline-flex gap-4 justify-end">
         <a
-            class="${currentPage eq contextPath.concat('/home') ? 'text-background bg-primary border border-primary' : 'text-primary'} w-40 underline-offset-4 cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none font-semibold px-3 py-2"
-            href="home"
+            class="${currentPage eq contextPath.concat('/admin/newproduct') ? 'text-background bg-primary border border-primary' : 'text-primary'} w-40 underline-offset-4 cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none font-semibold px-3 py-2"
+            href="${pageContext.request.contextPath}/admin/newproduct"
         >
             <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -56,19 +56,17 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                class="lucide lucide-house"
+                class="lucide lucide-plus"
             >
-                <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
-                <path
-                    d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
-                />
+                <path d="M5 12h14" />
+                <path d="M12 5v14" />
             </svg>
-            Home
+            Thêm sản phẩm
         </a>
 
         <a
-            class="${currentPage eq contextPath.concat('/shopping-cart') ? 'text-background bg-primary border border-primary' : 'text-primary'} w-40 underline-offset-4 cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none font-semibold px-3 py-2"
-            href="shopping-cart"
+            class="${currentPage eq contextPath.concat('/admin/allproduct') ? 'text-background bg-primary border border-primary' : 'text-primary'} w-40 underline-offset-4 cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none font-semibold px-3 py-2"
+            href="${pageContext.request.contextPath}/admin/allproduct"
         >
             <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -80,62 +78,40 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                class="lucide lucide-shopping-bag-icon lucide-shopping-bag"
+                class="lucide lucide-package"
             >
-                <path d="M16 10a4 4 0 0 1-8 0" />
-                <path d="M3.103 6.034h17.794" />
+                <path d="m7.5 4.27 9 5.15" />
                 <path
-                    d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"
+                    d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"
                 />
+                <path d="m3.3 7 8.7 5 8.7-5" />
+                <path d="M12 22V12" />
             </svg>
-            Shopping Cart
+            Tất cả sản phẩm
         </a>
 
-        <div class="relative inline-block text-left">
-            <button
-                type="button"
-                class="w-40 text-primary underline-offset-4 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none font-semibold cursor-pointer px-3 py-2"
-                id="categoriesMenuButton"
+        <a
+            class="${currentPage eq contextPath.concat('/admin/order') ? 'text-background bg-primary border border-primary' : 'text-primary'} w-40 underline-offset-4 cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none font-semibold px-3 py-2"
+            href="${pageContext.request.contextPath}/admin/order"
+        >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-shopping-cart"
             >
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="lucide lucide-list-checks"
-                >
-                    <path d="m3 17 2 2 4-4" />
-                    <path d="m3 7 2 2 4-4" />
-                    <path d="M13 6h8" />
-                    <path d="M13 12h8" />
-                    <path d="M13 18h8" />
-                </svg>
-                Category
-            </button>
-
-            <ul
-                id="categoriesDropdown"
-                class="hidden absolute left-0 mt-2 w-48 bg-white border rounded-lg shadow-lg z-50 overflow-hidden"
-            >
-                <!-- "Tất cả danh mục" sẽ được thêm bằng JavaScript -->
-                <c:forEach var="category" items="${listCategories}">
-                    <li
-                        class="px-2 py-2 hover:bg-gray-100 cursor-pointer category-item"
-                        data-category-id="${category.getId()}"
-                    >
-                        <span
-                            class="dropdown-item bg-green-100 border border-green-700 rounded-sm px-4 py-0.5 text-green-800 text-sm font-semibold ml-2"
-                            ><c:out value="${category.name}"
-                        /></span>
-                    </li>
-                </c:forEach>
-            </ul>
-        </div>
+                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                <path d="M3 6h18" />
+                <path d="M16 10a4 4 0 0 1-8 0" />
+            </svg>
+            Đơn hàng
+        </a>
     </div>
 </div>
 
@@ -149,60 +125,8 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             userButton.addEventListener('click', function (e) {
                 e.stopPropagation();
                 userDropdown.classList.toggle('hidden');
-                // Đóng categories dropdown nếu đang mở
-                const categoriesDropdown = document.getElementById('categoriesDropdown');
-                if (categoriesDropdown && !categoriesDropdown.classList.contains('hidden')) {
-                    categoriesDropdown.classList.add('hidden');
-                }
             });
         }
-
-        // Categories dropdown
-        const categoriesButton = document.getElementById('categoriesMenuButton');
-        const categoriesDropdown = document.getElementById('categoriesDropdown');
-
-        if (categoriesButton && categoriesDropdown) {
-            categoriesButton.addEventListener('click', function (e) {
-                e.stopPropagation();
-                categoriesDropdown.classList.toggle('hidden');
-                // Đóng user dropdown nếu đang mở
-                if (userDropdown && !userDropdown.classList.contains('hidden')) {
-                    userDropdown.classList.add('hidden');
-                }
-            });
-        }
-
-        // Category filtering functionality
-        // Thêm nút "Tất cả danh mục" vào đầu dropdown
-        const showAllButton = document.createElement('li');
-        showAllButton.className =
-            'px-2 py-2 hover:bg-gray-100 cursor-pointer border-b border-gray-200';
-        showAllButton.innerHTML = `
-            <span class="dropdown-item bg-blue-100 border border-blue-700 rounded-sm px-4 py-0.5 text-blue-800 text-sm font-semibold ml-2">
-                Tất cả danh mục
-            </span>
-        `;
-
-        if (categoriesDropdown) {
-            categoriesDropdown.insertBefore(showAllButton, categoriesDropdown.firstChild);
-        }
-
-        // Xử lý click "Tất cả danh mục"
-        showAllButton.addEventListener('click', function () {
-            showAllCategories();
-            categoriesDropdown.classList.add('hidden');
-        });
-
-        // Xử lý click cho từng category
-        const categoryItems = document.querySelectorAll('.category-item');
-        categoryItems.forEach(function (item) {
-            item.addEventListener('click', function () {
-                const categoryText = item.querySelector('.dropdown-item').textContent.trim();
-                const categoryId = item.getAttribute('data-category-id');
-                filterByCategory(categoryText, categoryId);
-                categoriesDropdown.classList.add('hidden');
-            });
-        });
 
         // Đóng dropdowns khi click outside
         document.addEventListener('click', function (e) {
@@ -213,45 +137,13 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             ) {
                 userDropdown.classList.add('hidden');
             }
-            if (
-                categoriesDropdown &&
-                !categoriesButton?.contains(e.target) &&
-                !categoriesDropdown.contains(e.target)
-            ) {
-                categoriesDropdown.classList.add('hidden');
-            }
         });
 
         // Đóng dropdowns khi nhấn Escape
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') {
                 if (userDropdown) userDropdown.classList.add('hidden');
-                if (categoriesDropdown) categoriesDropdown.classList.add('hidden');
             }
         });
     });
-
-    function showAllCategories() {
-        // Hiển thị tất cả sections
-        const sections = document.querySelectorAll('section[data-category-id]');
-        sections.forEach(function (section) {
-            section.style.display = 'block';
-        });
-
-        // Cập nhật title
-        updatePageTitle('Tất cả danh mục');
-    }
-
-    function filterByCategory(categoryName, categoryId) {
-        const sections = document.querySelectorAll('section[data-category-id]');
-
-        sections.forEach(function (section) {
-            const sectionCategoryId = section.getAttribute('data-category-id');
-            if (sectionCategoryId === categoryId) {
-                section.style.display = 'block';
-            } else {
-                section.style.display = 'none';
-            }
-        });
-    }
 </script>
