@@ -22,6 +22,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             >
                 Xin chào: <%= user.getName() %>
             </button>
+            <% if ("ADMIN".equals(user.getRole())) { %>
             <button
                 type="button"
                 class="justify-center flex gap-2 w-44 text-sm font-medium text-background cursor-pointer focus:outline-none bg-primary p-2 rounded-lg border border-primary font-semibold [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0"
@@ -47,6 +48,8 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                     <circle cx="12" cy="11" r="4" />
                 </svg>
             </button>
+            <% } %>
+
             <div
                 id="userDropdown"
                 class="hidden absolute left-0 mt-2 -bottom-20 w-40 bg-white border rounded-lg shadow-lg z-50"
