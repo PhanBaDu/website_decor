@@ -9,4 +9,8 @@ public interface CartDao {
     List<Cart> getCartsByUserId(int userId);
     
     boolean removeFromCart(int cartId);
+    
+    boolean increaseQuantity(int cartId, int maxQuantity);
+    
+    boolean decreaseQuantity(int cartId);
 }

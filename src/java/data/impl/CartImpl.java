@@ -58,7 +58,8 @@ public class CartImpl implements CartDao{
     public List<Cart> getCartsByUserId(int userId) {
         List<Cart> carts = new ArrayList<>();
 
-        String sql = "SELECT c.*, p.id AS product_id, p.name, p.image, p.price AS product_price, " +
+        String sql = "SELECT c.id, c.user_id, c.product_id, c.quantity AS cart_quantity, c.price, c.created_at, c.updated_at, " +
+            "p.id AS product_id, p.name, p.image, p.price AS product_price, " +
             "p.quantity AS product_quantity, p.status, p.id_category " +
             "FROM cart c " +
             "JOIN products p ON c.product_id = p.id " +
@@ -74,17 +75,17 @@ public class CartImpl implements CartDao{
                 cart.setId(rs.getInt("id"));
                 cart.setUserId(rs.getInt("user_id"));
                 cart.setProductId(rs.getInt("product_id"));
-                cart.setQuantity(rs.getInt("quantity"));
+                cart.setQuantity(rs.getInt("cart_quantity")); // Số lượng trong giỏ hàng
                 cart.setPrice(rs.getDouble("price"));
                 cart.setCreatedAt(rs.getTimestamp("created_at"));
                 cart.setUpdatedAt(rs.getTimestamp("updated_at"));
 
                 Product product = new Product();
-                product.setId(rs.getInt("id"));
+                product.setId(rs.getInt("product_id")); // ID của sản phẩm
                 product.setName(rs.getString("name"));
                 product.setImage(rs.getString("image"));
-                product.setPrice(rs.getDouble("price"));
-                product.setQuantity(rs.getInt("quantity"));
+                product.setPrice(rs.getDouble("product_price")); // Giá của sản phẩm
+                product.setQuantity(rs.getInt("product_quantity")); // Số lượng có sẵn trong kho
                 product.setStatus(rs.getBoolean("status"));
                 product.setIdCategory(rs.getInt("id_category"));
 
@@ -110,5 +111,70 @@ public class CartImpl implements CartDao{
             e.printStackTrace();
             return false;
         }
+    }
+    
+    @Override
+    public boolean increaseQuantity(int cartId, int maxQuantity) {
+        String checkSql = "SELECT quantity FROM cart WHERE id = ?";
+        String updateSql = "UPDATE cart SET quantity = quantity + 1, updated_at = CURRENT_TIMESTAMP WHERE id = ?";
+        
+        try {
+            // Kiểm tra số lượng hiện tại trong giỏ hàng
+            try (PreparedStatement checkPs = con.prepareStatement(checkSql)) {
+                checkPs.setInt(1, cartId);
+                ResultSet rs = checkPs.executeQuery();
+                
+                if (rs.next()) {
+                    int cartQuantity = rs.getInt("quantity"); // Số lượng trong giỏ hàng
+                    
+                    // Chỉ tăng nếu số lượng trong giỏ < số lượng có sẵn trong kho
+                    if (cartQuantity < maxQuantity) {
+                        try (PreparedStatement updatePs = con.prepareStatement(updateSql)) {
+                            updatePs.setInt(1, cartId);
+                            
+                            return updatePs.executeUpdate() > 0;
+                        }
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return false;
+    }
+    
+    @Override
+    public boolean decreaseQuantity(int cartId) {
+        String checkSql = "SELECT quantity FROM cart WHERE id = ?";
+        String updateSql = "UPDATE cart SET quantity = quantity - 1, updated_at = CURRENT_TIMESTAMP WHERE id = ? AND quantity > 1";
+        
+        try {
+            // Kiểm tra số lượng hiện tại
+            try (PreparedStatement checkPs = con.prepareStatement(checkSql)) {
+                checkPs.setInt(1, cartId);
+                ResultSet rs = checkPs.executeQuery();
+                
+                if (rs.next()) {
+                    int currentQuantity = rs.getInt("quantity");
+                    
+                    if (currentQuantity > 1) {
+                        // Giảm số lượng nếu > 1
+                        try (PreparedStatement updatePs = con.prepareStatement(updateSql)) {
+                            updatePs.setInt(1, cartId);
+                            
+                            return updatePs.executeUpdate() > 0;
+                        }
+                    } else if (currentQuantity == 1) {
+                        // Không làm gì nếu số lượng = 1 (không xóa)
+                        return true;
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return false;
     }
 }
