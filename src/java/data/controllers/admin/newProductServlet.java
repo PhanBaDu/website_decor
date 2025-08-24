@@ -70,14 +70,62 @@ public class newProductServlet extends HttpServlet {
             String name = request.getParameter("name");
             double price = Double.parseDouble(request.getParameter("price"));
             int quantity = Integer.parseInt(request.getParameter("quantity"));
-            String categoryInput = request.getParameter("categoryInput");
+            
+            // Handle category creation or selection
+            String categoryInput = request.getParameter("idCategory");
             String newCategoryName = request.getParameter("newCategoryName");
+            
+            // Debug logging
+            System.out.println("DEBUG - categoryInput: " + categoryInput);
+            System.out.println("DEBUG - newCategoryName: " + newCategoryName);
+            
+            int idCategory;
+            
+            // Check if user wants to create new category
+            if (newCategoryName != null && !newCategoryName.trim().isEmpty()) {
+                // Create new category
+                Category newCategory = new Category();
+                newCategory.setName(newCategoryName.trim());
+                
+                CategoryDao categoryDao = new CategoryImpl();
+                boolean categoryCreated = categoryDao.create(newCategory);
+                
+                if (categoryCreated) {
+                    // Get the newly created category ID
+                    List<Category> categories = categoryDao.findAll();
+                    idCategory = categories.stream()
+                        .filter(cat -> cat.getName().equals(newCategoryName.trim()))
+                        .findFirst()
+                        .map(Category::getId)
+                        .orElse(1); // fallback to first category if not found
+                } else {
+                    request.setAttribute("error", "Không thể tạo danh mục mới");
+                    doGet(request, response);
+                    return;
+                }
+            } else if (categoryInput != null && !categoryInput.trim().isEmpty()) {
+                // Use existing category
+                idCategory = Integer.parseInt(categoryInput);
+            } else {
+                request.setAttribute("error", "Vui lòng chọn danh mục hoặc tạo danh mục mới");
+                doGet(request, response);
+                return;
+            }
+            
             boolean status = "1".equals(request.getParameter("status"));
             
             // Handle file upload
             Part filePart = request.getPart("image");
             String fileName = null;
             
+            System.err.println("name: " + name);
+            System.err.println("price: " + price);
+            System.err.println("quantity: " + quantity);
+            System.err.println("categoryInput: " + categoryInput);
+            System.err.println("newCategoryName: " + newCategoryName);
+            System.err.println("status: " + status);
+            System.err.println("filePart: " + filePart);
+
             if (filePart != null && filePart.getSize() > 0) {
                 // Get file extension
                 String submittedFileName = filePart.getSubmittedFileName();
@@ -106,35 +154,6 @@ public class newProductServlet extends HttpServlet {
                 request.setAttribute("error", "Vui lòng chọn hình ảnh sản phẩm");
                 doGet(request, response);
                 return;
-            }
-            
-            int idCategory;
-            
-            // Handle category creation or selection
-            if ("new".equals(categoryInput) && newCategoryName != null && !newCategoryName.trim().isEmpty()) {
-                // Create new category
-                Category newCategory = new Category();
-                newCategory.setName(newCategoryName.trim());
-                
-                CategoryDao categoryDao = new CategoryImpl();
-                boolean categoryCreated = categoryDao.create(newCategory);
-                
-                if (categoryCreated) {
-                    // Get the newly created category ID
-                    List<Category> categories = categoryDao.findAll();
-                    idCategory = categories.stream()
-                        .filter(cat -> cat.getName().equals(newCategoryName.trim()))
-                        .findFirst()
-                        .map(Category::getId)
-                        .orElse(1); // fallback to first category if not found
-                } else {
-                    request.setAttribute("error", "Không thể tạo danh mục mới");
-                    doGet(request, response);
-                    return;
-                }
-            } else {
-                // Use existing category
-                idCategory = Integer.parseInt(categoryInput);
             }
             
             // Create product object

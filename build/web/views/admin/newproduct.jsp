@@ -21,17 +21,45 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 if (categorySelect.value === 'new') {
                     newCategoryDiv.classList.remove('hidden');
                     newCategoryInput.required = true;
-                    categorySelect.name = 'categoryInput';
+                    // Remove the name attribute so it doesn't interfere
+                    categorySelect.removeAttribute('name');
                 } else {
                     newCategoryDiv.classList.add('hidden');
                     newCategoryInput.required = false;
+                    // Set the name back to idCategory for existing categories
                     categorySelect.name = 'idCategory';
                 }
+            }
+
+            // Form validation and submission handling
+            function handleFormSubmit(e) {
+                const categorySelect = document.getElementById('categorySelect');
+                const newCategoryInput = document.getElementById('newCategoryName');
+
+                if (categorySelect.value === 'new') {
+                    // If creating new category, ensure the input has a name
+                    if (!newCategoryInput.name) {
+                        newCategoryInput.name = 'newCategoryName';
+                    }
+                    // Remove name from select to avoid conflict
+                    categorySelect.removeAttribute('name');
+                } else {
+                    // If using existing category, ensure select has the right name
+                    categorySelect.name = 'idCategory';
+                    // Remove name from new category input
+                    newCategoryInput.removeAttribute('name');
+                }
+
+                return true;
             }
 
             // Initialize on page load
             document.addEventListener('DOMContentLoaded', function () {
                 toggleCategoryInput();
+
+                // Add form submission handler
+                const form = document.querySelector('form');
+                form.addEventListener('submit', handleFormSubmit);
             });
         </script>
     </head>
@@ -96,9 +124,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                         <input
                             name="price"
                             id="price"
-                            type="number"
-                            min="0"
-                            step="1000"
+                            type="text"
                             placeholder="Nhập giá sản phẩm..."
                             class="w-full h-10 px-3 py-2 outline-none text-sm bg-background border border-input rounded-md placeholder:text-muted-foreground outline-none"
                             required
