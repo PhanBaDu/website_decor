@@ -17,7 +17,7 @@ public class CartImpl implements CartDao{
     
     @Override
     public boolean addNewProductToCart(Cart cart) {
-        String checkSql = "SELECT quantity FROM cart WHERE user_id = ? AND product_id = ?";
+        String checkSql = "SELECT quantity FROM orders WHERE user_id = ? AND product_id = ?";
         String insertSql = "INSERT INTO cart (user_id, product_id, quantity, price, created_at, updated_at) VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
         String updateSql = "UPDATE cart SET quantity = quantity + ?, price = ?, updated_at = CURRENT_TIMESTAMP WHERE user_id = ? AND product_id = ?";
 
@@ -61,7 +61,7 @@ public class CartImpl implements CartDao{
         String sql = "SELECT c.id, c.user_id, c.product_id, c.quantity AS cart_quantity, c.price, c.created_at, c.updated_at, " +
             "p.id AS product_id, p.name, p.image, p.price AS product_price, " +
             "p.quantity AS product_quantity, p.status, p.id_category " +
-            "FROM cart c " +
+            "FROM orders c " +
             "JOIN products p ON c.product_id = p.id " +
             "WHERE c.user_id = ?";
 
@@ -101,7 +101,7 @@ public class CartImpl implements CartDao{
     
     @Override
     public boolean removeFromCart(int cartId) {
-        String sql = "DELETE FROM cart WHERE id = ?";
+        String sql = "DELETE FROM orders WHERE id = ?";
         
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, cartId);
@@ -115,7 +115,7 @@ public class CartImpl implements CartDao{
     
     @Override
     public boolean increaseQuantity(int cartId, int maxQuantity) {
-        String checkSql = "SELECT quantity FROM cart WHERE id = ?";
+        String checkSql = "SELECT quantity FROM orders WHERE id = ?";
         String updateSql = "UPDATE cart SET quantity = quantity + 1, updated_at = CURRENT_TIMESTAMP WHERE id = ?";
         
         try {
@@ -146,7 +146,7 @@ public class CartImpl implements CartDao{
     
     @Override
     public boolean decreaseQuantity(int cartId) {
-        String checkSql = "SELECT quantity FROM cart WHERE id = ?";
+        String checkSql = "SELECT quantity FROM orders WHERE id = ?";
         String updateSql = "UPDATE cart SET quantity = quantity - 1, updated_at = CURRENT_TIMESTAMP WHERE id = ? AND quantity > 1";
         
         try {

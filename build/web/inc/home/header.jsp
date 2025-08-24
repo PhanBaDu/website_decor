@@ -24,7 +24,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             </button>
             <% if ("ADMIN".equals(user.getRole())) { %>
             <a
-                href="admin/dashboard"
+                href="admin/newproduct"
                 class="justify-center flex gap-2 w-44 text-sm font-medium text-background cursor-pointer focus:outline-none bg-primary p-2 rounded-lg border border-primary font-semibold [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0"
             >
                 <span>Admin</span>

@@ -22,33 +22,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             >
                 Xin chào: <%= user.getName() %>
             </button>
-            <% if ("ADMIN".equals(user.getRole())) { %>
-            <a
-                href="admin/newproduct"
-                class="justify-center flex gap-2 w-44 text-sm font-medium text-background cursor-pointer focus:outline-none bg-primary p-2 rounded-lg border border-primary font-semibold [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0"
-            >
-                <span>Admin</span>
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="lucide lucide-shield-user-icon lucide-shield-user"
-                >
-                    <path
-                        d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
-                    />
-                    <path d="M6.376 18.91a6 6 0 0 1 11.249.003" />
-                    <circle cx="12" cy="11" r="4" />
-                </svg>
-            </a>
-            <% } %>
-
             <div
                 id="userDropdown"
                 class="hidden absolute left-0 mt-2 -bottom-12 w-40 bg-white border rounded-lg shadow-lg z-50 overflow-hidden"
@@ -68,7 +41,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         <% } %>
     </div>
 
-    <div class="flex-1 inline-flex gap-4 justify-center">
+    <div class="flex-1 inline-flex gap-4 justify-end">
         <a
             class="${currentPage eq contextPath.concat('/home') ? 'text-background bg-primary border border-primary' : 'text-primary'} w-40 underline-offset-4 cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none font-semibold px-3 py-2"
             href="home"
@@ -163,34 +136,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 </c:forEach>
             </ul>
         </div>
-    </div>
-
-    <div class="flex-1 flex justify-end items-center gap-4">
-        <form action="${pageContext.request.contextPath}/search" method="GET" class="relative">
-            <div class="relative">
-                <svg
-                    class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                    />
-                </svg>
-                <input
-                    type="text"
-                    name="q"
-                    id="searchInput"
-                    placeholder="Tìm kiếm sản phẩm..."
-                    class="file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 rounded-md border bg-transparent pl-10 pr-10 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm shadow-none"
-                    autocomplete="off"
-                />
-            </div>
-        </form>
     </div>
 </div>
 
