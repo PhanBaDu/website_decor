@@ -153,43 +153,65 @@ uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
                 </c:choose>
             </div>
 
-            <!-- Thanh toán -->
-            <div class="w-2/5 bg-background p-6 rounded-lg h-fit">
-                <h3 class="text-lg font-semibold mb-4">Thông tin thanh toán</h3>
-
-                <div class="space-y-3 mb-6">
-                    <div class="flex justify-between">
-                        <span>Tạm tính:</span>
-                        <span id="subtotal">₫0</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span>Phí vận chuyển:</span>
-                        <span id="shipping">₫30,000</span>
-                    </div>
-                    <hr class="my-2" />
-                    <div class="flex justify-between text-lg font-semibold">
-                        <span>Tổng cộng:</span>
-                        <span id="total">₫30,000</span>
-                    </div>
-                </div>
-
-                <div class="space-y-4">
-                    <button
-                        type="button"
-                        id="checkoutBtn"
-                        class="w-full bg-primary text-primary-foreground py-3 rounded-md font-medium hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed"
-                        disabled
-                    >
-                        Đặt hàng (<span id="selectedCount">0</span> sản phẩm)
-                    </button>
-
-                    <div class="text-center">
-                        <a href="./home" class="text-sm text-muted-foreground hover:text-primary">
-                            ← Tiếp tục mua sắm
-                        </a>
-                    </div>
-                </div>
-            </div>
+                         <!-- Thanh toán -->
+             <div class="w-2/5 bg-background p-6 rounded-lg h-fit">
+                 <h3 class="text-sm font-semibold mb-4">Thông tin thanh toán</h3>
+ 
+                 <div class="space-y-3 mb-6">
+                     <div class="flex justify-between text-sm">
+                         <span>Tạm tính:</span>
+                         <span id="subtotal">
+                             <fmt:formatNumber
+                                 value="${totalAmount}"
+                                 type="number"
+                                 pattern="#,###"
+                             />đ
+                         </span>
+                     </div>
+                     <div class="flex justify-between text-sm">
+                         <span>Phí vận chuyển:</span>
+                         <span id="shipping">
+                             <c:choose>
+                                 <c:when test="${cartCount > 0}">30,000đ</c:when>
+                                 <c:otherwise>0đ</c:otherwise>
+                             </c:choose>
+                         </span>
+                     </div>
+                     <hr class="my-2" />
+                     <div class="flex justify-between text-sm font-semibold">
+                         <span>Tổng cộng:</span>
+                         <span id="total">
+                             <c:choose>
+                                 <c:when test="${cartCount > 0}">
+                                     <fmt:formatNumber
+                                         value="${totalAmount + 30000}"
+                                         type="number"
+                                         pattern="#,###"
+                                     />đ
+                                 </c:when>
+                                 <c:otherwise>0đ</c:otherwise>
+                             </c:choose>
+                         </span>
+                     </div>
+                 </div>
+ 
+                 <div class="space-y-4">
+                     <button
+                         type="button"
+                         id="checkoutBtn"
+                         class="w-full bg-primary text-primary-foreground py-3 rounded-md font-medium hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                         <c:if test="${cartCount == 0}">disabled</c:if>
+                     >
+                         Đặt hàng (${cartCount} sản phẩm)
+                     </button>
+ 
+                     <div class="text-center">
+                         <a href="./home" class="text-sm text-muted-foreground hover:text-primary">
+                             ← Tiếp tục mua sắm
+                         </a>
+                     </div>
+                 </div>
+             </div>
         </div>
 
         <jsp:include page="../inc/footer.jsp" />
