@@ -37,4 +37,18 @@ public class CategoryImpl implements CategoryDao {
 
         return list;
     }
+    
+    @Override
+    public boolean create(Category category) {
+        String sql = "INSERT INTO categories (name) VALUES (?)";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, category.getName());
+            
+            int result = ps.executeUpdate();
+            return result > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
