@@ -1,7 +1,7 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%> <%@ taglib
-uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> <%@ taglib
-uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> <%@ taglib
-uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,7 +18,7 @@ uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
                 <section class="">
                     <header class="w-full bg-background p-4 rounded-t-lg border-b border-gray-200">
                         <h3 class="font-semibold text-primary">
-                            Nhóm sản phẩm: <c:out value="${category.name}" />
+                            Nhóm sản phẩm: <span class="bg-green-100 border border-green-700 rounded-sm px-4 py-0.5 text-green-800 text-sm font-semibold ml-2"><c:out value="${category.name}" /></span>
                         </h3>
                     </header>
                     <div class="grid grid-cols-5 gap-4 p-4 bg-background rounded-b-lg">
@@ -38,7 +38,7 @@ uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
                                         <!-- Status Badge -->
                                         <c:if test="${product.getQuantity() <= 0}">
                                             <div
-                                                class="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-md text-xs font-semibold"
+                                                class="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-md text-xs font-bold"
                                             >
                                                 Hết hàng
                                             </div>
