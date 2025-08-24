@@ -29,13 +29,13 @@ uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
                     <c:when test="${empty cartItems}">
                         <div class="text-center py-12">
                             <div class="text-6xl mb-4">🛒</div>
-                            <h3 class="text-lg font-medium mb-2">Giỏ hàng trống</h3>
-                            <p class="text-muted-foreground mb-4">
+                            <h3 class="text-sm font-medium mb-2">Giỏ hàng trống</h3>
+                            <p class="text-muted-foreground mb-4 text-sm">
                                 Bạn chưa có sản phẩm nào trong giỏ hàng
                             </p>
                             <a
-                                href="./home"
-                                class="inline-flex items-center px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
+                                href="home"
+                                class="inline-flex items-center px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 text-sm"
                             >
                                 Tiếp tục mua sắm
                             </a>
@@ -63,7 +63,7 @@ uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
                                                 <!-- Nút xóa -->
                                                 <form
                                                     method="GET"
-                                                    action="./remove-from-cart"
+                                                    action="remove-from-cart"
                                                     style="display: inline"
                                                 >
                                                     <input
@@ -214,6 +214,38 @@ uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
              </div>
         </div>
 
+        <!-- Thông báo -->
+        <c:if test="${param.message == 'removed'}">
+            <div class="fixed bottom-4 right-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg shadow-lg text-sm z-50 max-w-sm">
+                <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>Đã xóa sản phẩm khỏi giỏ hàng thành công!</span>
+                </div>
+            </div>
+        </c:if>
+        <c:if test="${param.error == 'remove_failed'}">
+            <div class="fixed bottom-4 right-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg shadow-lg text-sm z-50 max-w-sm">
+                <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>Có lỗi xảy ra khi xóa sản phẩm. Vui lòng thử lại!</span>
+                </div>
+            </div>
+        </c:if>
+        <c:if test="${param.error == 'system_error'}">
+            <div class="fixed bottom-4 right-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg shadow-lg text-sm z-50 max-w-sm">
+                <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>Có lỗi hệ thống xảy ra. Vui lòng thử lại!</span>
+                </div>
+            </div>
+        </c:if>
+        
         <jsp:include page="../inc/footer.jsp" />
     </body>
 </html>

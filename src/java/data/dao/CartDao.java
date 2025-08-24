@@ -7,4 +7,6 @@ public interface CartDao {
     boolean addNewProductToCart(Cart cart);
     
     List<Cart> getCartsByUserId(int userId);
+    
+    boolean removeFromCart(int cartId);
 }

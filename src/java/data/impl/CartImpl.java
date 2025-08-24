@@ -97,4 +97,18 @@ public class CartImpl implements CartDao{
 
         return carts;
     }
+    
+    @Override
+    public boolean removeFromCart(int cartId) {
+        String sql = "DELETE FROM cart WHERE id = ?";
+        
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, cartId);
+            
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
