@@ -51,4 +51,22 @@ public class CategoryImpl implements CategoryDao {
             return false;
         }
     }
+    
+    @Override
+    public boolean existsByName(String name) {
+        String sql = "SELECT COUNT(*) FROM categories WHERE LOWER(name) = LOWER(?)";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, name);
+            
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    int count = rs.getInt(1);
+                    return count > 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

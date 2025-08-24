@@ -7,4 +7,6 @@ public interface CategoryDao {
     public List<Category> findAll();
     
     public boolean create(Category category);
+    
+    public boolean existsByName(String name);
 }

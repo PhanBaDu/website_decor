@@ -3,12 +3,12 @@ package data.controllers.admin;
 import data.models.User;
 import data.models.Category;
 import data.dao.CategoryDao;
+import data.dao.Database;
 import data.impl.CategoryImpl;
 import data.dao.ProductDao;
 import data.impl.ProductImpl;
 import data.models.Product;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -19,7 +19,6 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import java.util.List;
 import java.io.File;
-import java.nio.file.Paths;
 import java.util.UUID;
 
 @WebServlet(name = "newProductServlet", urlPatterns = {"/admin/newproduct"})
@@ -46,9 +45,7 @@ public class newProductServlet extends HttpServlet {
             return;
         }
         
-        // Fetch categories for the form
-        CategoryDao categoryDao = new CategoryImpl();
-        List<Category> categories = categoryDao.findAll();
+        List<Category> categories = Database.getCategoriesDao().findAll();
         request.setAttribute("categories", categories);
         
         request.getRequestDispatcher("/views/admin/newproduct.jsp").include(request, response);
@@ -66,45 +63,43 @@ public class newProductServlet extends HttpServlet {
         }
         
         try {
-            // Get form data
             String name = request.getParameter("name");
             double price = Double.parseDouble(request.getParameter("price"));
             int quantity = Integer.parseInt(request.getParameter("quantity"));
-            
-            // Handle category creation or selection
+
             String categoryInput = request.getParameter("idCategory");
             String newCategoryName = request.getParameter("newCategoryName");
             
-            // Debug logging
-            System.out.println("DEBUG - categoryInput: " + categoryInput);
-            System.out.println("DEBUG - newCategoryName: " + newCategoryName);
-            
             int idCategory;
             
-            // Check if user wants to create new category
             if (newCategoryName != null && !newCategoryName.trim().isEmpty()) {
+                // Check if category name already exists (case-insensitive)
+                CategoryDao categoryDao = new CategoryImpl();
+                if (categoryDao.existsByName(newCategoryName.trim())) {
+                    request.setAttribute("error", "Danh mục '" + newCategoryName.trim() + "' đã tồn tại. Vui lòng chọn tên khác.");
+                    doGet(request, response);
+                    return;
+                }
+                
                 // Create new category
                 Category newCategory = new Category();
                 newCategory.setName(newCategoryName.trim());
                 
-                CategoryDao categoryDao = new CategoryImpl();
                 boolean categoryCreated = categoryDao.create(newCategory);
                 
                 if (categoryCreated) {
-                    // Get the newly created category ID
                     List<Category> categories = categoryDao.findAll();
                     idCategory = categories.stream()
                         .filter(cat -> cat.getName().equals(newCategoryName.trim()))
                         .findFirst()
                         .map(Category::getId)
-                        .orElse(1); // fallback to first category if not found
+                        .orElse(1);
                 } else {
                     request.setAttribute("error", "Không thể tạo danh mục mới");
                     doGet(request, response);
                     return;
                 }
             } else if (categoryInput != null && !categoryInput.trim().isEmpty()) {
-                // Use existing category
                 idCategory = Integer.parseInt(categoryInput);
             } else {
                 request.setAttribute("error", "Vui lòng chọn danh mục hoặc tạo danh mục mới");
@@ -114,17 +109,8 @@ public class newProductServlet extends HttpServlet {
             
             boolean status = "1".equals(request.getParameter("status"));
             
-            // Handle file upload
             Part filePart = request.getPart("image");
             String fileName = null;
-            
-            System.err.println("name: " + name);
-            System.err.println("price: " + price);
-            System.err.println("quantity: " + quantity);
-            System.err.println("categoryInput: " + categoryInput);
-            System.err.println("newCategoryName: " + newCategoryName);
-            System.err.println("status: " + status);
-            System.err.println("filePart: " + filePart);
 
             if (filePart != null && filePart.getSize() > 0) {
                 // Get file extension
@@ -137,12 +123,30 @@ public class newProductServlet extends HttpServlet {
                 // Generate unique filename
                 String uniqueFileName = UUID.randomUUID().toString() + fileExtension;
                 
-                // Create uploads directory if it doesn't exist
-                String uploadPath = getServletContext().getRealPath("/uploads");
+                // Save to web/uploads directory (not build directory)
+                String webRootPath = getServletContext().getRealPath("/");
+                String uploadPath;
+                
+                // Try to find the project root by looking for 'web' directory
+                if (webRootPath.contains("build")) {
+                    // We're in build directory, go up to project root
+                    String projectRootPath = webRootPath.substring(0, webRootPath.indexOf("build"));
+                    uploadPath = projectRootPath + "web" + File.separator + "uploads";
+                } else {
+                    // We're already in project root or different environment
+                    // Use relative path from current working directory
+                    uploadPath = "web" + File.separator + "uploads";
+                }
+                
                 File uploadDir = new File(uploadPath);
                 if (!uploadDir.exists()) {
                     uploadDir.mkdirs();
                 }
+                
+                // Debug logging
+                System.out.println("DEBUG - webRootPath: " + webRootPath);
+                System.out.println("DEBUG - uploadPath: " + uploadPath);
+                System.out.println("DEBUG - uploadDir.exists(): " + uploadDir.exists());
                 
                 // Save file
                 String filePath = uploadPath + File.separator + uniqueFileName;

@@ -17,7 +17,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 const categorySelect = document.getElementById('categorySelect');
                 const newCategoryDiv = document.getElementById('newCategoryDiv');
                 const newCategoryInput = document.getElementById('newCategoryName');
-
+                
                 if (categorySelect.value === 'new') {
                     newCategoryDiv.classList.remove('hidden');
                     newCategoryInput.required = true;
@@ -30,17 +30,78 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                     categorySelect.name = 'idCategory';
                 }
             }
-
-            // Form validation and submission handling
+            
+            // Check if category name already exists
+            function checkCategoryName() {
+                const newCategoryInput = document.getElementById('newCategoryName');
+                const categoryNameError = document.getElementById('categoryNameError');
+                const categoryName = newCategoryInput.value.trim();
+                
+                if (categoryName === '') {
+                    newCategoryInput.classList.remove('border-red-500');
+                    categoryNameError.classList.add('hidden');
+                    return;
+                }
+                
+                const existingCategories = [
+                    <c:forEach var="category" items="${categories}" varStatus="status">
+                        "${category.name}"<c:if test="${!status.last}">,</c:if>
+                    </c:forEach>
+                ];
+                
+                // Check for exact match (case-insensitive)
+                const exists = existingCategories.some(existing => 
+                    existing.toLowerCase() === categoryName.toLowerCase()
+                );
+                
+                if (exists) {
+                    newCategoryInput.classList.add('border-red-500');
+                    categoryNameError.classList.remove('hidden');
+                    newCategoryInput.setCustomValidity('Danh mục này đã tồn tại!');
+                } else {
+                    newCategoryInput.classList.remove('border-red-500');
+                    categoryNameError.classList.add('hidden');
+                    newCategoryInput.setCustomValidity('');
+                }
+            }
+            
             function handleFormSubmit(e) {
                 const categorySelect = document.getElementById('categorySelect');
                 const newCategoryInput = document.getElementById('newCategoryName');
-
+                
                 if (categorySelect.value === 'new') {
                     // If creating new category, ensure the input has a name
                     if (!newCategoryInput.name) {
                         newCategoryInput.name = 'newCategoryName';
                     }
+                    
+                    // Check if category name is valid
+                    if (newCategoryInput.value.trim() === '') {
+                        e.preventDefault();
+                        alert('Vui lòng nhập tên danh mục mới');
+                        newCategoryInput.focus();
+                        return false;
+                    }
+                    
+                    // Check for duplicate category name
+                    const categoryName = newCategoryInput.value.trim();
+                    const existingCategories = [
+                        <c:forEach var="category" items="${categories}" varStatus="status">
+                            "${category.name}"<c:if test="${!status.last}">,</c:if>
+                        </c:forEach>
+                    ];
+                    
+                    const exists = existingCategories.some(existing => 
+                        existing.toLowerCase() === categoryName.toLowerCase()
+                    );
+                    
+                    if (exists) {
+                        e.preventDefault();
+                        alert('Danh mục "' + categoryName + '" đã tồn tại. Vui lòng chọn tên khác.');
+                        newCategoryInput.focus();
+                        return false;
+                    }
+                    
                     // Remove name from select to avoid conflict
                     categorySelect.removeAttribute('name');
                 } else {
@@ -49,17 +110,22 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                     // Remove name from new category input
                     newCategoryInput.removeAttribute('name');
                 }
-
+                
                 return true;
             }
-
+            
             // Initialize on page load
             document.addEventListener('DOMContentLoaded', function () {
                 toggleCategoryInput();
-
+                
                 // Add form submission handler
                 const form = document.querySelector('form');
                 form.addEventListener('submit', handleFormSubmit);
+                
+                // Add real-time validation for category name
+                const newCategoryInput = document.getElementById('newCategoryName');
+                newCategoryInput.addEventListener('input', checkCategoryName);
+                newCategoryInput.addEventListener('blur', checkCategoryName);
             });
         </script>
     </head>
@@ -84,7 +150,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                     </div>
                 </c:if>
 
-                <!-- Row 1: Product Name and Image URL -->
                 <div class="grid grid-cols-2 gap-6">
                     <div class="flex flex-col gap-2">
                         <label for="name" class="text-sm font-medium text-foreground">
@@ -115,7 +180,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                     </div>
                 </div>
 
-                <!-- Row 2: Price and Quantity -->
                 <div class="grid grid-cols-2 gap-6 mt-4">
                     <div class="flex flex-col gap-2">
                         <label for="price" class="text-sm font-medium text-foreground">
@@ -147,7 +211,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                     </div>
                 </div>
 
-                <!-- Row 3: Category and Status -->
                 <div class="grid grid-cols-2 gap-6 mt-4">
                     <div class="flex flex-col gap-2">
                         <label for="categorySelect" class="text-sm font-medium text-foreground">
@@ -166,15 +229,15 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                             <option value="new">+ Tạo danh mục mới</option>
                         </select>
 
-                        <!-- New Category Input (hidden by default) -->
                         <div id="newCategoryDiv" class="hidden mt-2">
                             <input
                                 name="newCategoryName"
                                 id="newCategoryName"
                                 type="text"
                                 placeholder="Nhập tên danh mục mới..."
-                                class="w-full h-10 px-3 outline-none py-2 outline-none text-sm bg-background border border-input rounded-md placeholder:text-muted-foreground outline-none"
+                                class="w-full h-10 px-3 outline-none py-2 text-sm bg-background border border-input rounded-md placeholder:text-muted-foreground transition-colors"
                             />
+                            <p id="categoryNameError" class="text-xs text-red-500 mt-1 hidden">Danh mục này đã tồn tại!</p>
                         </div>
                     </div>
 
@@ -194,7 +257,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                     </div>
                 </div>
 
-                <!-- Submit Button -->
                 <div class="flex justify-center mt-8">
                     <button
                         type="submit"
@@ -204,7 +266,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                     </button>
                 </div>
 
-                <!-- Back to products link -->
                 <div class="text-center text-xs mt-4">
                     <a
                         href="${pageContext.request.contextPath}/admin/allproduct"
