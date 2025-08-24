@@ -42,4 +42,28 @@ public class ProductImpl implements ProductDao{
         }
         return list;
     }
+    
+    @Override
+    public Product findById(int productId) {
+        String sql = "SELECT id, name, image, price, quantity, status, id_category FROM products WHERE id = ?";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, productId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    int id = rs.getInt("id");
+                    String name = rs.getString("name");
+                    String image = rs.getString("image");
+                    double price = rs.getDouble("price");
+                    int quantity = rs.getInt("quantity");
+                    boolean status = rs.getBoolean("status");
+                    int idCategory = rs.getInt("id_category");
+
+                    return new Product(id, name, image, price, quantity, status, idCategory);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

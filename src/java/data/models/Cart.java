@@ -9,6 +9,7 @@ public class Cart {
     private double price;
     private Timestamp createdAt;
     private Timestamp updatedAt;
+    private Product product;
     
     public Cart() {
         
@@ -30,6 +31,14 @@ public class Cart {
         this.productId = productId;
         this.quantity = quantity;
         this.price = price;
+    }
+    
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
     
     public int getId() {

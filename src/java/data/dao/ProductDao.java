@@ -5,4 +5,6 @@ import data.models.Product;
 
 public interface ProductDao {
     public List<Product> findAll();
+    
+    public Product findById(int id);
 }

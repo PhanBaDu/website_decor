@@ -1,4 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,7 +13,16 @@
     </head>
     <body class="bg-muted min-h-screen flex flex-col justify-between">
         <jsp:include page="../inc/home/header.jsp" />
-        <div class="flex-1 w-full flex max-w-7xl mx-auto mt-24 pb-24">Giỏ Hàng</div>
+        <div class="flex-1 w-full flex max-w-7xl mx-auto mt-24 pb-24 flex gap-6">
+            <div class="w-3/5 bg-background p-4 rounded-lg flex flex-col gap-4">
+                <c:forEach var="category" items="${cartItems}">
+                    <div class="w-full p-4 border rounded-sm">
+                        <span>${category.getName()}</span>
+                    </div>
+                </c:forEach>
+            </div>
+            <div class="w-2/5 bg-background p-4 rounded-lg"></div>
+        </div>
         <jsp:include page="../inc/footer.jsp" />
     </body>
 </html>
