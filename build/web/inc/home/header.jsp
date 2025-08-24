@@ -24,11 +24,28 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             </button>
             <button
                 type="button"
-                class="justify-center flex gap-2 w-44 text-sm font-medium text-background cursor-pointer focus:outline-none bg-primary p-2 rounded-lg border border-primary font-semibold [&_svg:not([class*='size-'])]:size-4  [&_svg]:shrink-0"
+                class="justify-center flex gap-2 w-44 text-sm font-medium text-background cursor-pointer focus:outline-none bg-primary p-2 rounded-lg border border-primary font-semibold [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0"
                 id="userMenuButton"
             >
                 <span>Admin</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-user-icon lucide-shield-user"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="M6.376 18.91a6 6 0 0 1 11.249.003"/><circle cx="12" cy="11" r="4"/></svg>
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-shield-user-icon lucide-shield-user"
+                >
+                    <path
+                        d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
+                    />
+                    <path d="M6.376 18.91a6 6 0 0 1 11.249.003" />
+                    <circle cx="12" cy="11" r="4" />
+                </svg>
             </button>
             <div
                 id="userDropdown"
@@ -133,9 +150,14 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 id="categoriesDropdown"
                 class="hidden absolute left-0 mt-2 w-48 bg-white border rounded-lg shadow-lg z-50 overflow-hidden"
             >
+                <!-- "Tất cả danh mục" sẽ được thêm bằng JavaScript -->
                 <c:forEach var="category" items="${listCategories}">
-                    <li class="px-2 py-2 hover:bg-gray-100 cursor-pointer">
-                        <span class="dropdown-item bg-green-100 border border-green-700 rounded-sm px-4 py-0.5 text-green-800 text-sm font-semibold ml-2"
+                    <li
+                        class="px-2 py-2 hover:bg-gray-100 cursor-pointer category-item"
+                        data-category-id="${category.getId()}"
+                    >
+                        <span
+                            class="dropdown-item bg-green-100 border border-green-700 rounded-sm px-4 py-0.5 text-green-800 text-sm font-semibold ml-2"
                             ><c:out value="${category.name}"
                         /></span>
                     </li>
@@ -206,6 +228,38 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             });
         }
 
+        // Category filtering functionality
+        // Thêm nút "Tất cả danh mục" vào đầu dropdown
+        const showAllButton = document.createElement('li');
+        showAllButton.className =
+            'px-2 py-2 hover:bg-gray-100 cursor-pointer border-b border-gray-200';
+        showAllButton.innerHTML = `
+            <span class="dropdown-item bg-blue-100 border border-blue-700 rounded-sm px-4 py-0.5 text-blue-800 text-sm font-semibold ml-2">
+                Tất cả danh mục
+            </span>
+        `;
+
+        if (categoriesDropdown) {
+            categoriesDropdown.insertBefore(showAllButton, categoriesDropdown.firstChild);
+        }
+
+        // Xử lý click "Tất cả danh mục"
+        showAllButton.addEventListener('click', function () {
+            showAllCategories();
+            categoriesDropdown.classList.add('hidden');
+        });
+
+        // Xử lý click cho từng category
+        const categoryItems = document.querySelectorAll('.category-item');
+        categoryItems.forEach(function (item) {
+            item.addEventListener('click', function () {
+                const categoryText = item.querySelector('.dropdown-item').textContent.trim();
+                const categoryId = item.getAttribute('data-category-id');
+                filterByCategory(categoryText, categoryId);
+                categoriesDropdown.classList.add('hidden');
+            });
+        });
+
         // Đóng dropdowns khi click outside
         document.addEventListener('click', function (e) {
             if (
@@ -232,4 +286,28 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             }
         });
     });
+
+    function showAllCategories() {
+        // Hiển thị tất cả sections
+        const sections = document.querySelectorAll('section[data-category-id]');
+        sections.forEach(function (section) {
+            section.style.display = 'block';
+        });
+
+        // Cập nhật title
+        updatePageTitle('Tất cả danh mục');
+    }
+
+    function filterByCategory(categoryName, categoryId) {
+        const sections = document.querySelectorAll('section[data-category-id]');
+
+        sections.forEach(function (section) {
+            const sectionCategoryId = section.getAttribute('data-category-id');
+            if (sectionCategoryId === categoryId) {
+                section.style.display = 'block';
+            } else {
+                section.style.display = 'none';
+            }
+        });
+    }
 </script>

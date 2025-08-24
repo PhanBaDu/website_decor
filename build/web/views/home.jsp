@@ -1,7 +1,7 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%> 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%> <%@ taglib
+uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> <%@ taglib
+uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> <%@ taglib
+uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,15 +15,21 @@
         <jsp:include page="../inc/home/header.jsp" />
         <div class="flex-1 flex-col gap-4 w-full flex max-w-7xl mx-auto mt-24 pb-24">
             <c:forEach var="category" items="${listCategories}">
-                <section class="">
+                <section class="category-section" data-category-id="${category.getId()}">
                     <header class="w-full bg-background p-4 rounded-t-lg border-b border-gray-200">
                         <h3 class="font-semibold text-primary">
-                            Nhóm sản phẩm: <span class="bg-green-100 border border-green-700 rounded-sm px-4 py-0.5 text-green-800 text-sm font-semibold ml-2"><c:out value="${category.name}" /></span>
+                            Nhóm sản phẩm:
+                            <span
+                                class="bg-green-100 border border-green-700 rounded-sm px-4 py-0.5 text-green-800 text-sm font-semibold ml-2"
+                                ><c:out value="${category.name}"
+                            /></span>
                         </h3>
                     </header>
                     <div class="grid grid-cols-5 gap-4 p-4 bg-background rounded-b-lg">
+                        <c:set var="hasProducts" value="false" />
                         <c:forEach var="product" items="${listProducts}">
                             <c:if test="${category.getId() == product.getIdCategory()}">
+                                <c:set var="hasProducts" value="true" />
                                 <div
                                     class="bg-white rounded-lg border overflow-hidden hover:shadow-lg transition-shadow"
                                 >
@@ -128,7 +134,7 @@
                                                 test="${product.getQuantity() > 0 && product.isStatus()}"
                                             >
                                                 <button
-                                                    class="px-4 py-2 has-[>svg]:px-3 cursor-pointer border bg-background shadow-xs inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-xs font-medium [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none text-lg"
+                                                    class="px-4 py-2 has-[>svg]:px-3 cursor-pointer border bg-background shadow-xs inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-xs font-medium [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none text-lg hover:bg-gray-50 transition-colors"
                                                 >
                                                     <svg
                                                         xmlns="http://www.w3.org/2000/svg"
@@ -155,6 +161,31 @@
                                 </div>
                             </c:if>
                         </c:forEach>
+
+                        <!-- Hiển thị thông báo nếu không có sản phẩm -->
+                        <c:if test="${!hasProducts}">
+                            <div class="col-span-5 text-center py-8 text-gray-500">
+                                <svg
+                                    class="mx-auto mb-4 w-16 h-16 text-gray-300"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
+                                    ></path>
+                                </svg>
+                                <p class="text-lg font-medium">
+                                    Chưa có sản phẩm nào trong danh mục này
+                                </p>
+                                <p class="text-sm">
+                                    Vui lòng quay lại sau hoặc xem các danh mục khác
+                                </p>
+                            </div>
+                        </c:if>
                     </div>
                 </section>
             </c:forEach>
