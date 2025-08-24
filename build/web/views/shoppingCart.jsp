@@ -19,10 +19,6 @@ uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
             <div class="w-3/5 bg-background p-6 rounded-lg">
                 <div class="flex items-center justify-between mb-6">
                     <h2 class="font-semibold text-sm">Giỏ hàng (${cartCount} sản phẩm)</h2>
-                    <div class="flex items-center gap-2">
-                        <input type="checkbox" id="selectAll" class="w-4 h-4 text-primary" />
-                        <label for="selectAll" class="text-sm">Chọn tất cả</label>
-                    </div>
                 </div>
 
                 <c:choose>
@@ -118,7 +114,7 @@ uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
                                                     <input type="hidden" name="cartId" value="${cartItem.id}" />
                                                     <button
                                                         type="submit"
-                                                        class="px-3 py-1 hover:bg-muted text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                                                        class="px-3 py-1 hover:bg-muted cursor-pointer text-sm disabled:opacity-50 disabled:cursor-not-allowed"
                                                         <c:if test="${cartItem.quantity <= 1}">disabled</c:if>
                                                     >
                                                         -
@@ -132,7 +128,7 @@ uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
                                                     <input type="hidden" name="productId" value="${cartItem.product.id}" />
                                                     <button
                                                         type="submit"
-                                                        class="px-3 py-1 hover:bg-muted text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                                                        class="px-3 py-1 hover:bg-muted cursor-pointer text-sm disabled:opacity-50 disabled:cursor-not-allowed"
                                                         <c:if test="${cartItem.quantity >= cartItem.product.quantity}">disabled</c:if>
                                                     >
                                                         +
@@ -254,49 +250,6 @@ uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
                 </div>
             </div>
         </c:if>
-        
-        <!-- Thông báo tăng/giảm số lượng -->
-        <c:if test="${param.message == 'quantity_increased'}">
-            <div class="fixed bottom-4 right-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg shadow-lg text-sm z-50 max-w-sm">
-                <div class="flex items-center gap-2">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                    </svg>
-                    <span>Đã tăng số lượng sản phẩm!</span>
-                </div>
-            </div>
-        </c:if>
-        <c:if test="${param.message == 'quantity_decreased'}">
-            <div class="fixed bottom-4 right-4 p-4 bg-blue-100 border border-blue-400 text-blue-700 rounded-lg shadow-lg text-sm z-50 max-w-sm">
-                <div class="flex items-center gap-2">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                    </svg>
-                    <span>Đã giảm số lượng sản phẩm!</span>
-                </div>
-            </div>
-        </c:if>
-        <c:if test="${param.error == 'quantity_limit_reached'}">
-            <div class="fixed bottom-4 right-4 p-4 bg-yellow-100 border border-yellow-400 text-yellow-700 rounded-lg shadow-lg text-sm z-50 max-w-sm">
-                <div class="flex items-center gap-2">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
-                    </svg>
-                    <span>Đã đạt giới hạn số lượng sản phẩm!</span>
-                </div>
-            </div>
-        </c:if>
-        <c:if test="${param.error == 'quantity_decrease_failed'}">
-            <div class="fixed bottom-4 right-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg shadow-lg text-sm z-50 max-w-sm">
-                <div class="flex items-center gap-2">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
-                    </svg>
-                    <span>Không thể giảm số lượng sản phẩm!</span>
-                </div>
-            </div>
-        </c:if>
-        
         <jsp:include page="../inc/footer.jsp" />
     </body>
 </html>
