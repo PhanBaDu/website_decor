@@ -26,7 +26,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 id="userDropdown"
                 class="hidden absolute left-0 mt-2 -bottom-12 w-40 bg-white border rounded-lg shadow-lg z-50 overflow-hidden"
             >
-                <a href="logout" class="block px-4 py-2 text-sm text-foreground hover:bg-gray-100"
+                <a href="http://localhost:8686/website_decor/logout" class="block px-4 py-2 text-sm text-foreground hover:bg-gray-100"
                     >Đăng xuất</a
                 >
             </div>
