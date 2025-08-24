@@ -34,8 +34,7 @@
                         type="text"
                         placeholder="Nhập email hoặc số điện thoại của bạn...."
                         class="w-full h-9 px-3 py-1 text-sm bg-background border border-input rounded-md placeholder:text-muted-foreground outline-none"
-                        re="password"
-                        class="text-sm font-medium text-foreground"
+                        required
                     />
                 </div>
                 <div class="flex flex-col gap-2">

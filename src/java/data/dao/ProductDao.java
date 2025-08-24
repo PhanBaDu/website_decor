@@ -7,4 +7,6 @@ public interface ProductDao {
     public List<Product> findAll();
     
     public Product findById(int id);
+    
+    public boolean create(Product product);
 }

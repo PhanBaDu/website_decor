@@ -66,4 +66,23 @@ public class ProductImpl implements ProductDao{
         }
         return null;
     }
+    
+    @Override
+    public boolean create(Product product) {
+        String sql = "INSERT INTO products (name, image, price, quantity, status, id_category) VALUES (?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, product.getName());
+            ps.setString(2, product.getImage());
+            ps.setDouble(3, product.getPrice());
+            ps.setInt(4, product.getQuantity());
+            ps.setBoolean(5, product.isStatus());
+            ps.setInt(6, product.getIdCategory());
+            
+            int result = ps.executeUpdate();
+            return result > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
