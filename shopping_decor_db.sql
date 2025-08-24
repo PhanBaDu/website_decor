@@ -24,10 +24,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cart`
+-- Table structure for table `carts`
 --
 
-CREATE TABLE `cart` (
+CREATE TABLE `carts` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
@@ -38,10 +38,10 @@ CREATE TABLE `cart` (
 ) ;
 
 --
--- Dumping data for table `cart`
+-- Dumping data for table `carts`
 --
 
-INSERT INTO `cart` (`id`, `user_id`, `product_id`, `quantity`, `price`, `created_at`, `updated_at`) VALUES
+INSERT INTO `carts` (`id`, `user_id`, `product_id`, `quantity`, `price`, `created_at`, `updated_at`) VALUES
 (1, 1, 2, 6, 800000, '2025-08-24 18:23:03', '2025-08-24 18:28:08'),
 (2, 1, 1, 2, 150000, '2025-08-24 18:24:25', '2025-08-24 18:53:26');
 
@@ -126,9 +126,9 @@ INSERT INTO `users` (`id`, `name`, `email`, `phone`, `password`, `role`) VALUES
 --
 
 --
--- Indexes for table `cart`
+-- Indexes for table `carts`
 --
-ALTER TABLE `cart`
+ALTER TABLE `carts`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `unique_user_product` (`user_id`,`product_id`),
   ADD KEY `idx_user_id` (`user_id`),
@@ -158,9 +158,9 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `cart`
+-- AUTO_INCREMENT for table `carts`
 --
-ALTER TABLE `cart`
+ALTER TABLE `carts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -186,11 +186,11 @@ ALTER TABLE `users`
 --
 
 --
--- Constraints for table `cart`
+-- Constraints for table `carts`
 --
-ALTER TABLE `cart`
-  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+ALTER TABLE `carts`
+  ADD CONSTRAINT `carts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `carts_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `products`

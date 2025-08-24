@@ -62,6 +62,6 @@ public class removeFromCart extends HttpServlet {
 
     @Override
     public String getServletInfo() {
-        return "Remove from orders";
+        return "Remove from cart";
     }
 }
