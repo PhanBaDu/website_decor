@@ -69,7 +69,7 @@ public class shoppingCartServlet extends HttpServlet {
             request.setAttribute("cartCount", 0);
         }
 
-        request.getRequestDispatcher("./views/shoppingCart.jsp").forward(request, response);
+        request.getRequestDispatcher("./views/shoppingCart.jsp").include(request, response);
     }
 
     @Override

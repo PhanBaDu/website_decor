@@ -46,18 +46,6 @@ uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
                             <c:forEach var="cartItem" items="${cartItems}">
                                 <div class="border rounded-lg p-4" data-cart-id="${cartItem.id}">
                                     <div class="flex items-start gap-4">
-                                        <!-- Checkbox -->
-                                        <input
-                                            type="checkbox"
-                                            name="selectedItems"
-                                            value="${cartItem.id}"
-                                            class="cart-checkbox w-4 h-4 text-primary mt-2"
-                                            data-cart-id="${cartItem.id}"
-                                            data-price="${cartItem.price}"
-                                            data-quantity="${cartItem.quantity}"
-                                            data-max-quantity="${cartItem.product.quantity}"
-                                        />
-
                                         <!-- Hình ảnh sản phẩm -->
                                         <img
                                             class="w-20 h-20 object-cover rounded-lg text-sm"
@@ -69,28 +57,47 @@ uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
                                         <div class="flex-1">
                                             <div class="flex gap-4 items-center">
                                                 <h3 class="font-medium mb-1 text-sm">
-                                                ${cartItem.product.name}
-                                            </h3>
-                                            
-                                            <!-- Nút xóa -->
-                                            <form
-                                                method="GET"
-                                                action="./remove-from-cart"
-                                                style="display: inline"
-                                            >
-                                                <input
-                                                    type="hidden"
-                                                    name="cartId"
-                                                    value="${cartItem.id}"
-                                                />
-                                                <button
-                                                    type="submit"
-                                                    class="text-red-500 hover:text-red-700 text-sm cursor-pointer"
-                                                    onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này khỏi giỏ hàng?')"
+                                                    ${cartItem.product.name}
+                                                </h3>
+
+                                                <!-- Nút xóa -->
+                                                <form
+                                                    method="GET"
+                                                    action="./remove-from-cart"
+                                                    style="display: inline"
                                                 >
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-icon lucide-trash"><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-                                                </button>
-                                            </form>
+                                                    <input
+                                                        type="hidden"
+                                                        name="cartId"
+                                                        value="${cartItem.id}"
+                                                    />
+                                                    <button
+                                                        type="submit"
+                                                        class="text-red-500 hover:text-red-700 text-sm cursor-pointer"
+                                                        onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này khỏi giỏ hàng?')"
+                                                    >
+                                                        <svg
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            width="16"
+                                                            height="16"
+                                                            viewBox="0 0 24 24"
+                                                            fill="none"
+                                                            stroke="currentColor"
+                                                            stroke-width="2"
+                                                            stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            class="lucide lucide-trash-icon lucide-trash"
+                                                        >
+                                                            <path
+                                                                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"
+                                                            />
+                                                            <path d="M3 6h18" />
+                                                            <path
+                                                                d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+                                                            />
+                                                        </svg>
+                                                    </button>
+                                                </form>
                                             </div>
                                             <p class="text-sm text-muted-foreground mb-2 text-xs">
                                                 Còn lại: ${cartItem.product.quantity} sản phẩm
@@ -105,7 +112,7 @@ uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
                                         </div>
 
                                         <!-- Điều chỉnh số lượng -->
-                                        <div class="flex flex-col items-end gap-2">
+                                        <div class="flex flex-col items-end gap-2 mt-2">
                                             <div class="flex items-center border rounded-md">
                                                 <button
                                                     type="button"
@@ -127,7 +134,9 @@ uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
                                             <!-- Tổng tiền cho sản phẩm này -->
                                             <div class="text-sm text-muted-foreground text-sm">
                                                 Tổng:
-                                                <span class="font-medium text-primary item-total text-sm">
+                                                <span
+                                                    class="font-medium text-primary item-total text-sm"
+                                                >
                                                     <fmt:formatNumber
                                                         value="${cartItem.subtotal}"
                                                         type="number"
