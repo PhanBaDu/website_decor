@@ -1,8 +1,11 @@
 package data.controllers.admin;
 
 import data.models.User;
+import data.models.Product;
+import data.models.Category;
+import data.dao.Database;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,23 +15,6 @@ import jakarta.servlet.http.HttpSession;
 
 @WebServlet(name = "allProductServlet", urlPatterns = {"/admin/allproduct"})
 public class allProductServlet extends HttpServlet {
-
-
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet allProductServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet allProductServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -45,17 +31,25 @@ public class allProductServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/home");
             return;
         }
+        
+        // Fetch all products and categories
+        List<Product> listProducts = Database.getProductsDao().findAll();
+        List<Category> listCategories = Database.getCategoriesDao().findAll();
+        
+        request.setAttribute("listProducts", listProducts);
+        request.setAttribute("listCategories", listCategories);
+        
         request.getRequestDispatcher("/views/admin/allproduct.jsp").include(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        doGet(request, response);
     }
 
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "All Products Admin Servlet";
     }
 }
