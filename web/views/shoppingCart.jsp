@@ -17,7 +17,14 @@ uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
             <div class="w-3/5 bg-background p-4 rounded-lg flex flex-col gap-4">
                 <c:forEach var="cartItem" items="${cartItems}">
                     <div class="w-full p-4 border rounded-sm">
-                        <span>${cartItem.product.getName()}</span>
+                        <div class="h-24 flex gap-4">
+                            <img
+                                class="rounded-lg overflow-hidden h-full w-24 object-cover"
+                                src="${cartItem.product.getImage()}"
+                                alt="${cartItem.product.getName()}"
+                            />
+                            <span class="text-sm font-medium">${cartItem.product.getName()}</span>
+                        </div>
                     </div>
                 </c:forEach>
             </div>
