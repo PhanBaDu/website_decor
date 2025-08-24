@@ -39,7 +39,7 @@ public class loginServlet extends HttpServlet {
         if (session != null && session.getAttribute("user") != null) {
             User user = (User) session.getAttribute("user");
             if ("ADMIN".equalsIgnoreCase(user.getRole())) {
-                response.sendRedirect(request.getContextPath() + "/admin/dashboard");
+                response.sendRedirect(request.getContextPath() + "/admin/newproduct");
             } else {
                 response.sendRedirect(request.getContextPath() + "/home");
             }
@@ -91,7 +91,7 @@ public class loginServlet extends HttpServlet {
         session.setAttribute("user", user);
 
         if ("ADMIN".equalsIgnoreCase(user.getRole())) {
-            response.sendRedirect(request.getContextPath() + "/admin/dashboard");
+            response.sendRedirect(request.getContextPath() + "/admin/newproduct");
         } else {
             response.sendRedirect(request.getContextPath() + "/home");
         }

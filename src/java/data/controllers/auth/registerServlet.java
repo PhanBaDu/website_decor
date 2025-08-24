@@ -1,6 +1,7 @@
 package data.controllers.auth;
 
 import data.dao.Database;
+import data.models.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -8,6 +9,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet(name = "registerServlet", urlPatterns = {"/register"})
 public class registerServlet extends HttpServlet {
@@ -32,7 +34,17 @@ public class registerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/views/register.jsp").include(request, response);
+        HttpSession session = request.getSession(false);
+        if (session != null && session.getAttribute("user") != null) {
+            User user = (User) session.getAttribute("user");
+            if ("ADMIN".equalsIgnoreCase(user.getRole())) {
+                response.sendRedirect(request.getContextPath() + "/admin/newproduct");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/home");
+            }
+        } else {
+            request.getRequestDispatcher("/views/register.jsp").include(request, response);
+        }
     }
 
     @Override
@@ -70,10 +82,24 @@ public class registerServlet extends HttpServlet {
             return;
         }
         
+        
         try {
-            Database.getUserDao().insertUser(name, email, phone, password);
+            User user = Database.getUserDao().insertUser(name, email, phone, password);
+            System.err.println(user);
+            if (user == null) {
+                request.setAttribute("error", "Thông tin đăng ký không chính xác.");
+                request.getRequestDispatcher("/views/register.jsp").include(request, response);
+                return;
+            }
             
-            response.sendRedirect(request.getContextPath() + "/home");
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
+
+            if ("ADMIN".equalsIgnoreCase(user.getRole())) {
+                response.sendRedirect(request.getContextPath() + "/admin/newproduct");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/home");
+            }
         } catch (IllegalArgumentException ex) {
             request.setAttribute("error", ex.getMessage());
             request.getRequestDispatcher("/views/register.jsp").include(request, response);

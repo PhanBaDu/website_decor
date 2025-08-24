@@ -6,7 +6,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="p-4 w-full flex items-center justify-between gap-4 fixed bg-background z-50">
     <div class="flex-1 flex items-center gap-4">
-        <a href="${pageContext.request.contextPath}">
+        <a href="${pageContext.request.contextPath}/home">
             <img
                 class="w-10"
                 src="${pageContext.request.contextPath}/assets/images/logo.svg"
@@ -23,10 +23,9 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 Xin chào: <%= user.getName() %>
             </button>
             <% if ("ADMIN".equals(user.getRole())) { %>
-            <button
-                type="button"
+            <a
+                href="admin/dashboard"
                 class="justify-center flex gap-2 w-44 text-sm font-medium text-background cursor-pointer focus:outline-none bg-primary p-2 rounded-lg border border-primary font-semibold [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0"
-                id="userMenuButton"
             >
                 <span>Admin</span>
                 <svg
@@ -47,16 +46,13 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                     <path d="M6.376 18.91a6 6 0 0 1 11.249.003" />
                     <circle cx="12" cy="11" r="4" />
                 </svg>
-            </button>
+            </a>
             <% } %>
 
             <div
                 id="userDropdown"
-                class="hidden absolute left-0 mt-2 -bottom-20 w-40 bg-white border rounded-lg shadow-lg z-50"
+                class="hidden absolute left-0 mt-2 -bottom-12 w-40 bg-white border rounded-lg shadow-lg z-50 overflow-hidden"
             >
-                <a href="profile" class="block px-4 py-2 text-sm text-foreground hover:bg-gray-100"
-                    >Thông tin cá nhân</a
-                >
                 <a href="logout" class="block px-4 py-2 text-sm text-foreground hover:bg-gray-100"
                     >Đăng xuất</a
                 >

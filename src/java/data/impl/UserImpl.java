@@ -7,6 +7,7 @@ import data.models.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class UserImpl implements UserDao{
     private Connection con;
@@ -60,7 +61,7 @@ public class UserImpl implements UserDao{
         }
         
         String sql = "INSERT INTO users (name, email, phone, password, role) VALUES (?, ?, ?, ?, ?)";
-        try (PreparedStatement ps = con.prepareStatement(sql)) {
+        try (PreparedStatement ps = con.prepareStatement(sql, 1)) {
             ps.setString(1, name);
             ps.setString(2, email);
             ps.setString(3, phone);
