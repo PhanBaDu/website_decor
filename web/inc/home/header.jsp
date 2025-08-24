@@ -49,7 +49,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             </button>
             <div
                 id="userDropdown"
-                class="hidden absolute left-0 mt-2 w-40 bg-white border rounded-lg shadow-lg z-50"
+                class="hidden absolute left-0 mt-2 -bottom-20 w-40 bg-white border rounded-lg shadow-lg z-50"
             >
                 <a href="profile" class="block px-4 py-2 text-sm text-foreground hover:bg-gray-100"
                     >Thông tin cá nhân</a
