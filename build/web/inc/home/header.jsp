@@ -74,7 +74,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
     <div class="flex-1 inline-flex gap-4 justify-center">
         <a
-            class="${currentPage eq contextPath.concat('/home') ? 'text-background bg-primary border border-primary' : 'text-primary'} underline-offset-4 cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none font-semibold px-3 py-2"
+            class="${currentPage eq contextPath.concat('/home') ? 'text-background bg-primary border border-primary' : 'text-primary'} w-40 underline-offset-4 cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none font-semibold px-3 py-2"
             href="home"
         >
             <svg
@@ -98,7 +98,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         </a>
 
         <a
-            class="${currentPage eq contextPath.concat('/shopping-cart') ? 'text-background bg-primary border border-primary' : 'text-primary'} underline-offset-4 cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none font-semibold px-3 py-2"
+            class="${currentPage eq contextPath.concat('/shopping-cart') ? 'text-background bg-primary border border-primary' : 'text-primary'} w-40 underline-offset-4 cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none font-semibold px-3 py-2"
             href="shopping-cart"
         >
             <svg
@@ -125,7 +125,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         <div class="relative inline-block text-left">
             <button
                 type="button"
-                class="text-primary underline-offset-4 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none font-semibold cursor-pointer px-3 py-2"
+                class="w-40 text-primary underline-offset-4 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none font-semibold cursor-pointer px-3 py-2"
                 id="categoriesMenuButton"
             >
                 <svg
