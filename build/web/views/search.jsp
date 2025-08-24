@@ -15,7 +15,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
         <div class="flex-1 w-full max-w-7xl mx-auto mt-24 pb-24 px-6">
             <!-- Header tìm kiếm -->
-            <div class="mb-8">
+            <div class="mb-5">
                 <div class="flex items-center gap-4">
                     <div class="text-sm text-muted-foreground">
                         Tìm thấy ${totalResults} sản phẩm
@@ -50,44 +50,124 @@ uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
                                 class="bg-background rounded-lg shadow-sm hover:shadow-md transition-shadow"
                             >
                                 <!-- Hình ảnh sản phẩm -->
-                                <div class="aspect-square overflow-hidden rounded-t-lg">
+                                <div class="relative aspect-square overflow-hidden rounded-t-lg">
                                     <img
                                         src="${product.image}"
                                         alt="${product.name}"
                                         class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                                     />
+
+                                    <!-- Status Badge -->
+                                    <c:if test="${product.quantity <= 0}">
+                                        <div
+                                            class="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-md text-xs font-bold"
+                                        >
+                                            Hết hàng
+                                        </div>
+                                    </c:if>
                                 </div>
 
                                 <!-- Thông tin sản phẩm -->
                                 <div class="p-4">
-                                    <h3 class="font-medium mb-2 text-sm line-clamp-2">
+                                    <!-- Tên sản phẩm -->
+                                    <h3
+                                        class="font-semibold text-lg text-gray-800 mb-2 line-clamp-2 text-sm"
+                                    >
                                         ${product.name}
                                     </h3>
 
                                     <!-- Giá sản phẩm -->
-                                    <div class="text-lg font-semibold text-primary mb-3 text-sm">
-                                        <fmt:formatNumber
-                                            value="${product.price}"
-                                            type="number"
-                                            pattern="#,###"
-                                        />đ
+                                    <div class="mb-3 text-sm">
+                                        <span class="font-bold text-primary">
+                                            <fmt:formatNumber
+                                                value="${product.price}"
+                                                pattern="#,###"
+                                            />₫
+                                        </span>
                                     </div>
 
-                                    <!-- Nút thêm vào giỏ hàng -->
-                                    <form method="POST" action="add-to-cart" class="w-full">
-                                        <input
-                                            type="hidden"
-                                            name="productId"
-                                            value="${product.id}"
-                                        />
-                                        <input type="hidden" name="quantity" value="1" />
-                                        <button
-                                            type="submit"
-                                            class="w-full bg-primary text-primary-foreground py-2 rounded-md font-medium hover:bg-primary/90 transition-colors text-sm"
+                                    <!-- Trạng thái sản phẩm -->
+                                    <div class="flex justify-between items-baseline">
+                                        <c:choose>
+                                            <c:when test="${product.status}">
+                                                <span
+                                                    class="inline-flex items-center px-2 py-1 rounded-sm text-xs font-medium bg-green-100 text-green-800 mb-1"
+                                                >
+                                                    <span
+                                                        class="w-2 h-2 mr-1 bg-green-400 rounded-full"
+                                                    ></span>
+                                                    Đang bán
+                                                </span>
+                                                <!-- Số lượng sản phẩm -->
+                                                <div class="mb-3">
+                                                    <c:choose>
+                                                        <c:when test="${product.quantity > 0}">
+                                                            <h1
+                                                                class="text-primary font-bold text-xs"
+                                                            >
+                                                                Số lượng:
+                                                                <span
+                                                                    class="text-green-600 font-bold text-sm"
+                                                                    >${product.quantity}</span
+                                                                >
+                                                            </h1>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <span
+                                                                class="text-red-600 text-xs font-semibold"
+                                                            >
+                                                                Hết hàng
+                                                            </span>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </div>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <span
+                                                    class="inline-flex mb-3 items-center px-2 py-1 rounded-sm text-xs font-medium bg-gray-100 text-gray-800"
+                                                >
+                                                    <span
+                                                        class="w-2 h-2 mr-2 bg-gray-400 rounded-full"
+                                                    ></span>
+                                                    Ngừng bán
+                                                </span>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </div>
+
+                                    <!-- Action Buttons -->
+                                    <div class="flex gap-2">
+                                        <a
+                                            href="${pageContext.request.contextPath}/product?id=${product.id}"
+                                            class="flex-1 inline-flex justify-center bg-primary text-white text-center py-2 px-2 rounded-md hover:bg-primary/90 transition-colors text-sm font-medium"
                                         >
-                                            Thêm vào giỏ hàng
-                                        </button>
-                                    </form>
+                                            Chi tiết sản phẩm
+                                        </a>
+
+                                        <c:if test="${product.quantity > 0 && product.status}">
+                                            <form
+                                                action="add-to-cart?action=newProductToCart"
+                                                method="post"
+                                            >
+                                                <input
+                                                    type="hidden"
+                                                    name="id"
+                                                    value="${product.id}"
+                                                />
+                                                <input
+                                                    type="hidden"
+                                                    name="price"
+                                                    value="${product.price}"
+                                                />
+                                                <button
+                                                    type="submit"
+                                                    class="px-4 py-2.5 has-[>svg]:px-3 cursor-pointer border bg-background shadow-xs inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-xs font-medium [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none text-lg hover:bg-gray-50 transition-colors"
+                                                >
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-plus-icon lucide-badge-plus"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><line x1="12" x2="12" y1="8" y2="16"/><line x1="8" x2="16" y1="12" y2="12"/></svg>
+                                                </button>
+                                            </form>
+                                        </c:if>
+                                    </div>
                                 </div>
                             </div>
                         </c:forEach>
