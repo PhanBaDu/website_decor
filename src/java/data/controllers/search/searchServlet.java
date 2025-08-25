@@ -45,7 +45,6 @@ public class searchServlet extends HttpServlet {
                 .collect(Collectors.toList());
             
             // Đặt kết quả vào request
-            request.setAttribute("searchQuery", searchQuery);
             request.setAttribute("searchResults", searchResults);
             request.setAttribute("totalResults", searchResults.size());
             

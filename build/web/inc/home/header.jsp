@@ -166,7 +166,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     </div>
 
     <div class="flex-1 flex justify-end items-center gap-4">
-        <form action="${pageContext.request.contextPath}/search" method="GET" class="relative">
+        <form action="search" method="GET" class="relative">
             <div class="relative">
                 <svg
                     class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground"

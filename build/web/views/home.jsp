@@ -133,7 +133,7 @@
                                             <c:if
                                                 test="${product.getQuantity() > 0 && product.isStatus()}"
                                             >
-                                                <form action="add-to-cart?action=newProductToCart" method="post">
+                                                <form action="add-to-cart" method="post">
                                                     <input type="hidden" name="id" value="${product.getId()}" />
                                                     <input type="hidden" name="price" value="${product.getPrice()}" />
                                                     <button type="submit"

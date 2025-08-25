@@ -53,7 +53,6 @@ public class addProductToCart extends HttpServlet {
             return;
         }
 
-        String action = request.getParameter("action");
         String productIdStr = request.getParameter("id");
         String priceStr = request.getParameter("price");
 
@@ -71,21 +70,11 @@ public class addProductToCart extends HttpServlet {
             int productId = Integer.parseInt(productIdStr);
             double price = Double.parseDouble(priceStr);
 
-            if (action == null || action.trim().isEmpty()) {
-                action = "newProductToCart";
-            }
-
-            switch (action) {
-                case "newProductToCart":
-                    boolean success = Database.getCartDao().addNewProductToCart(new Cart(user.getId(), productId, 1, price));
-                    if (success) {
-                        response.sendRedirect(request.getContextPath() + "/shopping-cart");
-                    } else {
-                        response.getWriter().write("{\"success\": false, \"message\": \"Không thể thêm sản phẩm vào giỏ hàng\"}");
-                    }
-                    break;
-                default:
-                    response.getWriter().write("{\"success\": false, \"message\": \"Action không hợp lệ: " + action + "\"}");
+            boolean success = Database.getCartDao().addNewProductToCart(new Cart(user.getId(), productId, 1, price));
+            if (success) {
+                response.sendRedirect(request.getContextPath() + "/shopping-cart");
+            } else {
+                response.getWriter().write("{\"success\": false, \"message\": \"Không thể thêm sản phẩm vào giỏ hàng\"}");
             }
         } catch (NumberFormatException e) {
             response.getWriter().write("{\"success\": false, \"message\": \"Dữ liệu đầu vào không hợp lệ\"}");

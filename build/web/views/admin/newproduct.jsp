@@ -13,121 +13,18 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/globals.css" />
         <script>
+            // Only show/hide the new category input. No validation.
             function toggleCategoryInput() {
                 const categorySelect = document.getElementById('categorySelect');
                 const newCategoryDiv = document.getElementById('newCategoryDiv');
-                const newCategoryInput = document.getElementById('newCategoryName');
-
                 if (categorySelect.value === 'new') {
                     newCategoryDiv.classList.remove('hidden');
-                    newCategoryInput.required = true;
-                    // Remove the name attribute so it doesn't interfere
-                    categorySelect.removeAttribute('name');
                 } else {
                     newCategoryDiv.classList.add('hidden');
-                    newCategoryInput.required = false;
-                    // Set the name back to idCategory for existing categories
-                    categorySelect.name = 'idCategory';
                 }
             }
-
-            // Check if category name already exists
-            function checkCategoryName() {
-                const newCategoryInput = document.getElementById('newCategoryName');
-                const categoryNameError = document.getElementById('categoryNameError');
-                const categoryName = newCategoryInput.value.trim();
-
-                if (categoryName === '') {
-                    newCategoryInput.classList.remove('border-red-500');
-                    categoryNameError.classList.add('hidden');
-                    return;
-                }
-
-                const existingCategories = [
-                    <c:forEach var="category" items="${categories}" varStatus="status">
-                        "${category.name}"<c:if test="${!status.last}">,</c:if>
-                    </c:forEach>,
-                ];
-
-                // Check for exact match (case-insensitive)
-                const exists = existingCategories.some(
-                    (existing) => existing.toLowerCase() === categoryName.toLowerCase(),
-                );
-
-                if (exists) {
-                    newCategoryInput.classList.add('border-red-500');
-                    categoryNameError.classList.remove('hidden');
-                    newCategoryInput.setCustomValidity('Danh mục này đã tồn tại!');
-                } else {
-                    newCategoryInput.classList.remove('border-red-500');
-                    categoryNameError.classList.add('hidden');
-                    newCategoryInput.setCustomValidity('');
-                }
-            }
-
-            function handleFormSubmit(e) {
-                const categorySelect = document.getElementById('categorySelect');
-                const newCategoryInput = document.getElementById('newCategoryName');
-
-                if (categorySelect.value === 'new') {
-                    // If creating new category, ensure the input has a name
-                    if (!newCategoryInput.name) {
-                        newCategoryInput.name = 'newCategoryName';
-                    }
-
-                    // Check if category name is valid
-                    if (newCategoryInput.value.trim() === '') {
-                        e.preventDefault();
-                        alert('Vui lòng nhập tên danh mục mới');
-                        newCategoryInput.focus();
-                        return false;
-                    }
-
-                    // Check for duplicate category name
-                    const categoryName = newCategoryInput.value.trim();
-                    const existingCategories = [
-                        <c:forEach var="category" items="${categories}" varStatus="status">
-                            "${category.name}"<c:if test="${!status.last}">,</c:if>
-                        </c:forEach>,
-                    ];
-
-                    const exists = existingCategories.some(
-                        (existing) => existing.toLowerCase() === categoryName.toLowerCase(),
-                    );
-
-                    if (exists) {
-                        e.preventDefault();
-                        alert(
-                            'Danh mục "' + categoryName + '" đã tồn tại. Vui lòng chọn tên khác.',
-                        );
-                        newCategoryInput.focus();
-                        return false;
-                    }
-
-                    // Remove name from select to avoid conflict
-                    categorySelect.removeAttribute('name');
-                } else {
-                    // If using existing category, ensure select has the right name
-                    categorySelect.name = 'idCategory';
-                    // Remove name from new category input
-                    newCategoryInput.removeAttribute('name');
-                }
-
-                return true;
-            }
-
-            // Initialize on page load
             document.addEventListener('DOMContentLoaded', function () {
                 toggleCategoryInput();
-
-                // Add form submission handler
-                const form = document.querySelector('form');
-                form.addEventListener('submit', handleFormSubmit);
-
-                // Add real-time validation for category name
-                const newCategoryInput = document.getElementById('newCategoryName');
-                newCategoryInput.addEventListener('input', checkCategoryName);
-                newCategoryInput.addEventListener('blur', checkCategoryName);
             });
         </script>
     </head>
@@ -220,6 +117,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                         </label>
                         <select
                             id="categorySelect"
+                            name="idCategory"
                             onchange="toggleCategoryInput()"
                             class="w-full h-10 px-3 py-2 text-sm bg-background border border-input rounded-md outline-none"
                             required
@@ -239,9 +137,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                                 placeholder="Nhập tên danh mục mới..."
                                 class="w-full h-10 px-3 outline-none py-2 text-sm bg-background border border-input rounded-md placeholder:text-muted-foreground transition-colors"
                             />
-                            <p id="categoryNameError" class="text-xs text-red-500 mt-1 hidden">
-                                Danh mục này đã tồn tại!
-                            </p>
                         </div>
                     </div>
 
