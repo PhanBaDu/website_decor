@@ -1,1034 +1,1076 @@
 :root {
-  --radius: 0.65rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+    --radius: 0.65rem;
+    --background: oklch(1 0 0);
+    --foreground: oklch(0.145 0 0);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.145 0 0);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.145 0 0);
+    --primary: oklch(0.205 0 0);
+    --primary-foreground: oklch(0.985 0 0);
+    --secondary: oklch(0.97 0 0);
+    --secondary-foreground: oklch(0.205 0 0);
+    --muted: oklch(0.97 0 0);
+    --muted-foreground: oklch(0.556 0 0);
+    --accent: oklch(0.97 0 0);
+    --accent-foreground: oklch(0.205 0 0);
+    --destructive: oklch(0.577 0.245 27.325);
+    --border: oklch(0.922 0 0);
+    --input: oklch(0.922 0 0);
+    --ring: oklch(0.708 0 0);
+    --chart-1: oklch(0.646 0.222 41.116);
+    --chart-2: oklch(0.6 0.118 184.704);
+    --chart-3: oklch(0.398 0.07 227.392);
+    --chart-4: oklch(0.828 0.189 84.429);
+    --chart-5: oklch(0.769 0.188 70.08);
+    --radius: 0.625rem;
+    --sidebar: oklch(0.985 0 0);
+    --sidebar-foreground: oklch(0.145 0 0);
+    --sidebar-primary: oklch(0.205 0 0);
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.97 0 0);
+    --sidebar-accent-foreground: oklch(0.205 0 0);
+    --sidebar-border: oklch(0.922 0 0);
+    --sidebar-ring: oklch(0.708 0 0);
 }
 
 /* Ẩn nút tăng/giảm trên Chrome, Edge, Safari */
 input[type='number']::-webkit-outer-spin-button,
 input[type='number']::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 /* Ẩn nút tăng/giảm trên Firefox */
 input[type='number'] {
-  -moz-appearance: textfield;
+    -moz-appearance: textfield;
 }
 
 .hide-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 .hide-scrollbar::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+    width: 8px;
+    height: 8px;
 }
 
 @layer base {
-  ::-webkit-scrollbar-thumb {
-    background: #0f172a; /* light mode */
-    border-radius: 4px;
-  }
+    ::-webkit-scrollbar-thumb {
+        background: #0f172a; /* light mode */
+        border-radius: 4px;
+    }
 
-  html.dark ::-webkit-scrollbar-thumb {
-    background: #ffffff; /* dark mode */
-  }
+    html.dark ::-webkit-scrollbar-thumb {
+        background: #ffffff; /* dark mode */
+    }
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
-  border-radius: 4px;
+    background: transparent;
+    border-radius: 4px;
 }
 
 /* === Background color classes === */
 .bg-background {
-  background-color: var(--background);
+    background-color: var(--background);
 }
 .bg-foreground {
-  background-color: var(--foreground);
+    background-color: var(--foreground);
 }
 .bg-card {
-  background-color: var(--card);
+    background-color: var(--card);
 }
 .bg-popover {
-  background-color: var(--popover);
+    background-color: var(--popover);
 }
 .bg-primary {
-  background-color: var(--primary);
+    background-color: var(--primary);
 }
 .bg-secondary {
-  background-color: var(--secondary);
+    background-color: var(--secondary);
 }
 .bg-muted {
-  background-color: var(--muted);
+    background-color: var(--muted);
 }
 .bg-accent {
-  background-color: var(--accent);
+    background-color: var(--accent);
 }
 .bg-destructive {
-  background-color: var(--destructive);
+    background-color: var(--destructive);
 }
 .bg-border {
-  background-color: var(--border);
+    background-color: var(--border);
 }
 .bg-input {
-  background-color: var(--input);
+    background-color: var(--input);
 }
 .bg-ring {
-  background-color: var(--ring);
+    background-color: var(--ring);
 }
 .bg-sidebar {
-  background-color: var(--sidebar);
+    background-color: var(--sidebar);
 }
 .bg-sidebar-primary {
-  background-color: var(--sidebar-primary);
+    background-color: var(--sidebar-primary);
 }
 .bg-sidebar-accent {
-  background-color: var(--sidebar-accent);
+    background-color: var(--sidebar-accent);
 }
 
 /* === Text color classes === */
 .text-background {
-  color: var(--background);
+    color: var(--background);
 }
 .text-foreground {
-  color: var(--foreground);
+    color: var(--foreground);
 }
 .text-card {
-  color: var(--card);
+    color: var(--card);
 }
 .text-card-foreground {
-  color: var(--card-foreground);
+    color: var(--card-foreground);
 }
 .text-popover {
-  color: var(--popover);
+    color: var(--popover);
 }
 .text-popover-foreground {
-  color: var(--popover-foreground);
+    color: var(--popover-foreground);
 }
 .text-primary {
-  color: var(--primary);
+    color: var(--primary);
 }
 .text-primary-foreground {
-  color: var(--primary-foreground);
+    color: var(--primary-foreground);
 }
 .text-secondary {
-  color: var(--secondary);
+    color: var(--secondary);
 }
 .text-secondary-foreground {
-  color: var(--secondary-foreground);
+    color: var(--secondary-foreground);
 }
 .text-muted {
-  color: var(--muted);
+    color: var(--muted);
 }
 .text-muted-foreground {
-  color: var(--muted-foreground);
+    color: var(--muted-foreground);
 }
 .text-accent {
-  color: var(--accent);
+    color: var(--accent);
 }
 .text-accent-foreground {
-  color: var(--accent-foreground);
+    color: var(--accent-foreground);
 }
 .text-destructive {
-  color: var(--destructive);
+    color: var(--destructive);
 }
 .text-destructive-foreground {
-  color: var(--destructive-foreground);
+    color: var(--destructive-foreground);
 }
 .text-border {
-  color: var(--border);
+    color: var(--border);
 }
 .text-input {
-  color: var(--input);
+    color: var(--input);
 }
 .text-ring {
-  color: var(--ring);
+    color: var(--ring);
 }
 .text-sidebar {
-  color: var(--sidebar);
+    color: var(--sidebar);
 }
 .text-sidebar-foreground {
-  color: var(--sidebar-foreground);
+    color: var(--sidebar-foreground);
 }
 .text-sidebar-primary {
-  color: var(--sidebar-primary);
+    color: var(--sidebar-primary);
 }
 .text-sidebar-primary-foreground {
-  color: var(--sidebar-primary-foreground);
+    color: var(--sidebar-primary-foreground);
 }
 .text-sidebar-accent {
-  color: var(--sidebar-accent);
+    color: var(--sidebar-accent);
 }
 .text-sidebar-accent-foreground {
-  color: var(--sidebar-accent-foreground);
+    color: var(--sidebar-accent-foreground);
 }
 
 /* === Border color classes === */
 .border {
-  border-color: var(--border);
+    border-color: var(--border);
 }
 .border-background {
-  border-color: var(--background);
+    border-color: var(--background);
 }
 .border-foreground {
-  border-color: var(--foreground);
+    border-color: var(--foreground);
 }
 .border-card {
-  border-color: var(--card);
+    border-color: var(--card);
 }
 .border-card-foreground {
-  border-color: var(--card-foreground);
+    border-color: var(--card-foreground);
 }
 .border-popover {
-  border-color: var(--popover);
+    border-color: var(--popover);
 }
 .border-popover-foreground {
-  border-color: var(--popover-foreground);
+    border-color: var(--popover-foreground);
 }
 .border-primary {
-  border-color: var(--primary);
+    border-color: var(--primary);
 }
 .border-primary-foreground {
-  border-color: var(--primary-foreground);
+    border-color: var(--primary-foreground);
 }
 .border-secondary {
-  border-color: var(--secondary);
+    border-color: var(--secondary);
 }
 .border-secondary-foreground {
-  border-color: var(--secondary-foreground);
+    border-color: var(--secondary-foreground);
 }
 .border-muted {
-  border-color: var(--muted);
+    border-color: var(--muted);
 }
 .border-muted-foreground {
-  border-color: var(--muted-foreground);
+    border-color: var(--muted-foreground);
 }
 .border-accent {
-  border-color: var(--accent);
+    border-color: var(--accent);
 }
 .border-accent-foreground {
-  border-color: var(--accent-foreground);
+    border-color: var(--accent-foreground);
 }
 .border-destructive {
-  border-color: var(--destructive);
+    border-color: var(--destructive);
 }
 .border-destructive-foreground {
-  border-color: var(--destructive-foreground);
+    border-color: var(--destructive-foreground);
 }
 .border-input {
-  border-color: var(--input);
+    border-color: var(--input);
 }
 .border-ring {
-  border-color: var(--ring);
+    border-color: var(--ring);
 }
 .border-sidebar {
-  border-color: var(--sidebar-border);
+    border-color: var(--sidebar-border);
 }
 .border-sidebar-primary {
-  border-color: var(--sidebar-primary);
+    border-color: var(--sidebar-primary);
 }
 .border-sidebar-accent {
-  border-color: var(--sidebar-accent);
+    border-color: var(--sidebar-accent);
 }
 
 /* === Ring color classes === */
 .ring-background {
-  box-shadow: 0 0 0 3px var(--background);
+    box-shadow: 0 0 0 3px var(--background);
 }
 .ring-foreground {
-  box-shadow: 0 0 0 3px var(--foreground);
+    box-shadow: 0 0 0 3px var(--foreground);
 }
 .ring-card {
-  box-shadow: 0 0 0 3px var(--card);
+    box-shadow: 0 0 0 3px var(--card);
 }
 .ring-popover {
-  box-shadow: 0 0 0 3px var(--popover);
+    box-shadow: 0 0 0 3px var(--popover);
 }
 .ring-primary {
-  box-shadow: 0 0 0 3px var(--primary);
+    box-shadow: 0 0 0 3px var(--primary);
 }
 .ring-secondary {
-  box-shadow: 0 0 0 3px var(--secondary);
+    box-shadow: 0 0 0 3px var(--secondary);
 }
 .ring-muted {
-  box-shadow: 0 0 0 3px var(--muted);
+    box-shadow: 0 0 0 3px var(--muted);
 }
 .ring-accent {
-  box-shadow: 0 0 0 3px var(--accent);
+    box-shadow: 0 0 0 3px var(--accent);
 }
 .ring-destructive {
-  box-shadow: 0 0 0 3px var(--destructive);
+    box-shadow: 0 0 0 3px var(--destructive);
 }
 .ring-border {
-  box-shadow: 0 0 0 3px var(--border);
+    box-shadow: 0 0 0 3px var(--border);
 }
 .ring-input {
-  box-shadow: 0 0 0 3px var(--input);
+    box-shadow: 0 0 0 3px var(--input);
 }
 .ring {
-  box-shadow: 0 0 0 3px var(--ring);
+    box-shadow: 0 0 0 3px var(--ring);
 }
 .ring-sidebar {
-  box-shadow: 0 0 0 3px var(--sidebar-ring);
+    box-shadow: 0 0 0 3px var(--sidebar-ring);
 }
 .ring-sidebar-primary {
-  box-shadow: 0 0 0 3px var(--sidebar-primary);
+    box-shadow: 0 0 0 3px var(--sidebar-primary);
 }
 .ring-sidebar-accent {
-  box-shadow: 0 0 0 3px var(--sidebar-accent);
+    box-shadow: 0 0 0 3px var(--sidebar-accent);
 }
 
 /* === Fill color classes (for SVG) === */
 .fill-background {
-  fill: var(--background);
+    fill: var(--background);
 }
 .fill-foreground {
-  fill: var(--foreground);
+    fill: var(--foreground);
 }
 .fill-card {
-  fill: var(--card);
+    fill: var(--card);
 }
 .fill-popover {
-  fill: var(--popover);
+    fill: var(--popover);
 }
 .fill-primary {
-  fill: var(--primary);
+    fill: var(--primary);
 }
 .fill-secondary {
-  fill: var(--secondary);
+    fill: var(--secondary);
 }
 .fill-muted {
-  fill: var(--muted);
+    fill: var(--muted);
 }
 .fill-accent {
-  fill: var(--accent);
+    fill: var(--accent);
 }
 .fill-destructive {
-  fill: var(--destructive);
+    fill: var(--destructive);
 }
 .fill-border {
-  fill: var(--border);
+    fill: var(--border);
 }
 .fill-input {
-  fill: var(--input);
+    fill: var(--input);
 }
 .fill-ring {
-  fill: var(--ring);
+    fill: var(--ring);
 }
 .fill-sidebar {
-  fill: var(--sidebar);
+    fill: var(--sidebar);
 }
 .fill-sidebar-primary {
-  fill: var(--sidebar-primary);
+    fill: var(--sidebar-primary);
 }
 .fill-sidebar-accent {
-  fill: var(--sidebar-accent);
+    fill: var(--sidebar-accent);
 }
 
 /* === Stroke color classes (for SVG) === */
 .stroke-background {
-  stroke: var(--background);
+    stroke: var(--background);
 }
 .stroke-foreground {
-  stroke: var(--foreground);
+    stroke: var(--foreground);
 }
 .stroke-card {
-  stroke: var(--card);
+    stroke: var(--card);
 }
 .stroke-popover {
-  stroke: var(--popover);
+    stroke: var(--popover);
 }
 .stroke-primary {
-  stroke: var(--primary);
+    stroke: var(--primary);
 }
 .stroke-secondary {
-  stroke: var(--secondary);
+    stroke: var(--secondary);
 }
 .stroke-muted {
-  stroke: var(--muted);
+    stroke: var(--muted);
 }
 .stroke-accent {
-  stroke: var(--accent);
+    stroke: var(--accent);
 }
 .stroke-destructive {
-  stroke: var(--destructive);
+    stroke: var(--destructive);
 }
 .stroke-border {
-  stroke: var(--border);
+    stroke: var(--border);
 }
 .stroke-input {
-  stroke: var(--input);
+    stroke: var(--input);
 }
 .stroke-ring {
-  stroke: var(--ring);
+    stroke: var(--ring);
 }
 .stroke-sidebar {
-  stroke: var(--sidebar);
+    stroke: var(--sidebar);
 }
 .stroke-sidebar-primary {
-  stroke: var(--sidebar-primary);
+    stroke: var(--sidebar-primary);
 }
 .stroke-sidebar-accent {
-  stroke: var(--sidebar-accent);
+    stroke: var(--sidebar-accent);
 }
 
 /* === Chart background helpers === */
 .bg-chart-1 {
-  background-color: var(--chart-1);
+    background-color: var(--chart-1);
 }
 .bg-chart-2 {
-  background-color: var(--chart-2);
+    background-color: var(--chart-2);
 }
 .bg-chart-3 {
-  background-color: var(--chart-3);
+    background-color: var(--chart-3);
 }
 .bg-chart-4 {
-  background-color: var(--chart-4);
+    background-color: var(--chart-4);
 }
 .bg-chart-5 {
-  background-color: var(--chart-5);
+    background-color: var(--chart-5);
 }
 
 /* === Chart text helpers === */
 .text-chart-1 {
-  color: var(--chart-1);
+    color: var(--chart-1);
 }
 .text-chart-2 {
-  color: var(--chart-2);
+    color: var(--chart-2);
 }
 .text-chart-3 {
-  color: var(--chart-3);
+    color: var(--chart-3);
 }
 .text-chart-4 {
-  color: var(--chart-4);
+    color: var(--chart-4);
 }
 .text-chart-5 {
-  color: var(--chart-5);
+    color: var(--chart-5);
 }
 
 /* === Chart border helpers === */
 .border-chart-1 {
-  border-color: var(--chart-1);
+    border-color: var(--chart-1);
 }
 .border-chart-2 {
-  border-color: var(--chart-2);
+    border-color: var(--chart-2);
 }
 .border-chart-3 {
-  border-color: var(--chart-3);
+    border-color: var(--chart-3);
 }
 .border-chart-4 {
-  border-color: var(--chart-4);
+    border-color: var(--chart-4);
 }
 .border-chart-5 {
-  border-color: var(--chart-5);
+    border-color: var(--chart-5);
 }
 
 /* === Chart fill helpers === */
 .fill-chart-1 {
-  fill: var(--chart-1);
+    fill: var(--chart-1);
 }
 .fill-chart-2 {
-  fill: var(--chart-2);
+    fill: var(--chart-2);
 }
 .fill-chart-3 {
-  fill: var(--chart-3);
+    fill: var(--chart-3);
 }
 .fill-chart-4 {
-  fill: var(--chart-4);
+    fill: var(--chart-4);
 }
 .fill-chart-5 {
-  fill: var(--chart-5);
+    fill: var(--chart-5);
 }
 
 /* === Chart stroke helpers === */
 .stroke-chart-1 {
-  stroke: var(--chart-1);
+    stroke: var(--chart-1);
 }
 .stroke-chart-2 {
-  stroke: var(--chart-2);
+    stroke: var(--chart-2);
 }
 .stroke-chart-3 {
-  stroke: var(--chart-3);
+    stroke: var(--chart-3);
 }
 .stroke-chart-4 {
-  stroke: var(--chart-4);
+    stroke: var(--chart-4);
 }
 .stroke-chart-5 {
-  stroke: var(--chart-5);
+    stroke: var(--chart-5);
 }
 
 /* === Outline color classes === */
 .outline-background {
-  outline-color: var(--background);
+    outline-color: var(--background);
 }
 .outline-foreground {
-  outline-color: var(--foreground);
+    outline-color: var(--foreground);
 }
 .outline-primary {
-  outline-color: var(--primary);
+    outline-color: var(--primary);
 }
 .outline-secondary {
-  outline-color: var(--secondary);
+    outline-color: var(--secondary);
 }
 .outline-muted {
-  outline-color: var(--muted);
+    outline-color: var(--muted);
 }
 .outline-accent {
-  outline-color: var(--accent);
+    outline-color: var(--accent);
 }
 .outline-destructive {
-  outline-color: var(--destructive);
+    outline-color: var(--destructive);
 }
 .outline-border {
-  outline-color: var(--border);
+    outline-color: var(--border);
 }
 .outline-ring {
-  outline-color: var(--ring);
+    outline-color: var(--ring);
 }
 
 /* === Caret color classes === */
 .caret-background {
-  caret-color: var(--background);
+    caret-color: var(--background);
 }
 .caret-foreground {
-  caret-color: var(--foreground);
+    caret-color: var(--foreground);
 }
 .caret-primary {
-  caret-color: var(--primary);
+    caret-color: var(--primary);
 }
 .caret-secondary {
-  caret-color: var(--secondary);
+    caret-color: var(--secondary);
 }
 .caret-muted {
-  caret-color: var(--muted);
+    caret-color: var(--muted);
 }
 .caret-accent {
-  caret-color: var(--accent);
+    caret-color: var(--accent);
 }
 .caret-destructive {
-  caret-color: var(--destructive);
+    caret-color: var(--destructive);
 }
 .caret-ring {
-  caret-color: var(--ring);
+    caret-color: var(--ring);
 }
 
 /* === Radius === */
 .rounded {
-  border-radius: var(--radius);
+    border-radius: var(--radius);
 }
 .rounded-sm {
-  border-radius: calc(var(--radius) - 2px);
+    border-radius: calc(var(--radius) - 2px);
 }
 .rounded-md {
-  border-radius: calc(var(--radius) - 1px);
+    border-radius: calc(var(--radius) - 1px);
 }
 .rounded-lg {
-  border-radius: var(--radius);
+    border-radius: var(--radius);
 }
 .rounded-xl {
-  border-radius: calc(var(--radius) + 2px);
+    border-radius: calc(var(--radius) + 2px);
 }
 .rounded-2xl {
-  border-radius: calc(var(--radius) + 4px);
+    border-radius: calc(var(--radius) + 4px);
 }
 
 /* === Placeholder color classes === */
 .placeholder-background::placeholder {
-  color: var(--background);
+    color: var(--background);
 }
 .placeholder-foreground::placeholder {
-  color: var(--foreground);
+    color: var(--foreground);
 }
 .placeholder-primary::placeholder {
-  color: var(--primary);
+    color: var(--primary);
 }
 .placeholder-secondary::placeholder {
-  color: var(--secondary);
+    color: var(--secondary);
 }
 .placeholder-muted::placeholder {
-  color: var(--muted);
+    color: var(--muted);
 }
 .placeholder-muted-foreground::placeholder {
-  color: var(--muted-foreground);
+    color: var(--muted-foreground);
 }
 .placeholder-accent::placeholder {
-  color: var(--accent);
+    color: var(--accent);
 }
 .placeholder-destructive::placeholder {
-  color: var(--destructive);
+    color: var(--destructive);
 }
 
 /* === Selection color classes === */
 .selection-background::selection {
-  background-color: var(--background);
+    background-color: var(--background);
 }
 .selection-primary::selection {
-  background-color: var(--primary);
+    background-color: var(--primary);
 }
 .selection-secondary::selection {
-  background-color: var(--secondary);
+    background-color: var(--secondary);
 }
 .selection-muted::selection {
-  background-color: var(--muted);
+    background-color: var(--muted);
 }
 .selection-accent::selection {
-  background-color: var(--accent);
+    background-color: var(--accent);
 }
 .selection-destructive::selection {
-  background-color: var(--destructive);
+    background-color: var(--destructive);
 }
 
 /* Thin (100) */
 @font-face {
-  font-family: 'Inter';
-  src: url('../fonts/Inter_18pt-Thin.ttf') format('truetype');
-  font-weight: 100;
-  font-style: normal;
+    font-family: 'Inter';
+    src: url('../fonts/Inter_18pt-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
 }
 
 @font-face {
-  font-family: 'Inter';
-  src: url('../fonts/Inter_18pt-ThinItalic.ttf') format('truetype');
-  font-weight: 100;
-  font-style: italic;
+    font-family: 'Inter';
+    src: url('../fonts/Inter_18pt-ThinItalic.ttf') format('truetype');
+    font-weight: 100;
+    font-style: italic;
 }
 
 /* Extra Light (200) */
 @font-face {
-  font-family: 'Inter';
-  src: url('../fonts/Inter_18pt-ExtraLight.ttf') format('truetype');
-  font-weight: 200;
-  font-style: normal;
+    font-family: 'Inter';
+    src: url('../fonts/Inter_18pt-ExtraLight.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
 }
 
 @font-face {
-  font-family: 'Inter';
-  src: url('../fonts/Inter_18pt-ExtraLightItalic.ttf') format('truetype');
-  font-weight: 200;
-  font-style: italic;
+    font-family: 'Inter';
+    src: url('../fonts/Inter_18pt-ExtraLightItalic.ttf') format('truetype');
+    font-weight: 200;
+    font-style: italic;
 }
 
 /* Light (300) */
 @font-face {
-  font-family: 'Inter';
-  src: url('../fonts/Inter_18pt-Light.ttf') format('truetype');
-  font-weight: 300;
-  font-style: normal;
+    font-family: 'Inter';
+    src: url('../fonts/Inter_18pt-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
 }
 
 @font-face {
-  font-family: 'Inter';
-  src: url('../fonts/Inter_18pt-LightItalic.ttf') format('truetype');
-  font-weight: 300;
-  font-style: italic;
+    font-family: 'Inter';
+    src: url('../fonts/Inter_18pt-LightItalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
 }
 
 /* Regular (400) */
 @font-face {
-  font-family: 'Inter';
-  src: url('../fonts/Inter_18pt-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
+    font-family: 'Inter';
+    src: url('../fonts/Inter_18pt-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
 }
 
 @font-face {
-  font-family: 'Inter';
-  src: url('../fonts/Inter_18pt-Italic.ttf') format('truetype');
-  font-weight: 400;
-  font-style: italic;
+    font-family: 'Inter';
+    src: url('../fonts/Inter_18pt-Italic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
 }
 
 /* Medium (500) */
 @font-face {
-  font-family: 'Inter';
-  src: url('../fonts/Inter_18pt-Medium.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
+    font-family: 'Inter';
+    src: url('../fonts/Inter_18pt-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
 }
 
 @font-face {
-  font-family: 'Inter';
-  src: url('../fonts/Inter_18pt-MediumItalic.ttf') format('truetype');
-  font-weight: 500;
-  font-style: italic;
+    font-family: 'Inter';
+    src: url('../fonts/Inter_18pt-MediumItalic.ttf') format('truetype');
+    font-weight: 500;
+    font-style: italic;
 }
 
 /* SemiBold (600) */
 @font-face {
-  font-family: 'Inter';
-  src: url('../fonts/Inter_18pt-SemiBold.ttf') format('truetype');
-  font-weight: 600;
-  font-style: normal;
+    font-family: 'Inter';
+    src: url('../fonts/Inter_18pt-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
 }
 
 @font-face {
-  font-family: 'Inter';
-  src: url('../fonts/Inter_18pt-SemiBoldItalic.ttf') format('truetype');
-  font-weight: 600;
-  font-style: italic;
+    font-family: 'Inter';
+    src: url('../fonts/Inter_18pt-SemiBoldItalic.ttf') format('truetype');
+    font-weight: 600;
+    font-style: italic;
 }
 
 /* Bold (700) */
 @font-face {
-  font-family: 'Inter';
-  src: url('../fonts/Inter_18pt-Bold.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
+    font-family: 'Inter';
+    src: url('../fonts/Inter_18pt-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
 }
 
 @font-face {
-  font-family: 'Inter';
-  src: url('../fonts/Inter_18pt-BoldItalic.ttf') format('truetype');
-  font-weight: 700;
-  font-style: italic;
+    font-family: 'Inter';
+    src: url('../fonts/Inter_18pt-BoldItalic.ttf') format('truetype');
+    font-weight: 700;
+    font-style: italic;
 }
 
 /* ExtraBold (800) */
 @font-face {
-  font-family: 'Inter';
-  src: url('../fonts/Inter_18pt-ExtraBold.ttf') format('truetype');
-  font-weight: 800;
-  font-style: normal;
+    font-family: 'Inter';
+    src: url('../fonts/Inter_18pt-ExtraBold.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
 }
 
 @font-face {
-  font-family: 'Inter';
-  src: url('../fonts/Inter_18pt-ExtraBoldItalic.ttf') format('truetype');
-  font-weight: 800;
-  font-style: italic;
+    font-family: 'Inter';
+    src: url('../fonts/Inter_18pt-ExtraBoldItalic.ttf') format('truetype');
+    font-weight: 800;
+    font-style: italic;
 }
 
 /* Black (900) */
 @font-face {
-  font-family: 'Inter';
-  src: url('../fonts/Inter_18pt-Black.ttf') format('truetype');
-  font-weight: 900;
-  font-style: normal;
+    font-family: 'Inter';
+    src: url('../fonts/Inter_18pt-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
 }
 
 @font-face {
-  font-family: 'Inter';
-  src: url('../fonts/Inter_18pt-BlackItalic.ttf') format('truetype');
-  font-weight: 900;
-  font-style: italic;
+    font-family: 'Inter';
+    src: url('../fonts/Inter_18pt-BlackItalic.ttf') format('truetype');
+    font-weight: 900;
+    font-style: italic;
 }
 
 .font-thin {
-  font-family: 'Inter', sans-serif;
-  font-weight: 100;
-  font-style: normal;
+    font-family: 'Inter', sans-serif;
+    font-weight: 100;
+    font-style: normal;
 }
 .font-thin-italic {
-  font-family: 'Inter', sans-serif;
-  font-weight: 100;
-  font-style: italic;
+    font-family: 'Inter', sans-serif;
+    font-weight: 100;
+    font-style: italic;
 }
 
 .font-extralight {
-  font-family: 'Inter', sans-serif;
-  font-weight: 200;
-  font-style: normal;
+    font-family: 'Inter', sans-serif;
+    font-weight: 200;
+    font-style: normal;
 }
 .font-extralight-italic {
-  font-family: 'Inter', sans-serif;
-  font-weight: 200;
-  font-style: italic;
+    font-family: 'Inter', sans-serif;
+    font-weight: 200;
+    font-style: italic;
 }
 
 .font-light {
-  font-family: 'Inter', sans-serif;
-  font-weight: 300;
-  font-style: normal;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-style: normal;
 }
 .font-light-italic {
-  font-family: 'Inter', sans-serif;
-  font-weight: 300;
-  font-style: italic;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-style: italic;
 }
 
 .font-regular {
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  font-style: normal;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 .font-regular-italic {
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  font-style: italic;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-style: italic;
 }
 
 .font-medium {
-  font-family: 'Inter', sans-serif;
-  font-weight: 500;
-  font-style: normal;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-style: normal;
 }
 .font-medium-italic {
-  font-family: 'Inter', sans-serif;
-  font-weight: 500;
-  font-style: italic;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-style: italic;
 }
 
 .font-semibold {
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  font-style: normal;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-style: normal;
 }
 .font-semibold-italic {
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  font-style: italic;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-style: italic;
 }
 
 .font-bold {
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  font-style: normal;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-style: normal;
 }
 .font-bold-italic {
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  font-style: italic;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-style: italic;
 }
 
 .font-extrabold {
-  font-family: 'Inter', sans-serif;
-  font-weight: 800;
-  font-style: normal;
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-style: normal;
 }
 .font-extrabold-italic {
-  font-family: 'Inter', sans-serif;
-  font-weight: 800;
-  font-style: italic;
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-style: italic;
 }
 
 .font-black {
-  font-family: 'Inter', sans-serif;
-  font-weight: 900;
-  font-style: normal;
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    font-style: normal;
 }
 .font-black-italic {
-  font-family: 'Inter', sans-serif;
-  font-weight: 900;
-  font-style: italic;
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    font-style: italic;
 }
 
 *,
 html,
 body {
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  font-style: normal;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 .slider-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  position: relative;
-  background: white;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .slider-wrapper {
-  overflow: hidden;
-  position: relative;
-  height: 500px;
+    overflow: hidden;
+    position: relative;
+    height: 500px;
 }
 
 .slider-track {
-  display: flex;
-  transition: transform 0.5s ease-in-out;
-  height: 100%;
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    height: 100%;
 }
 
 .slide {
-  min-width: 100%;
-  height: 100%;
-  position: relative;
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    min-width: 100%;
+    height: 100%;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .slide:nth-child(1) {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 .slide:nth-child(2) {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
 }
 
 .slide:nth-child(3) {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
 }
 
 .slide:nth-child(4) {
-  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
 }
 
 .slide:nth-child(5) {
-  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
 }
 
 .slide-content {
-  text-align: center;
-  color: white;
-  z-index: 2;
+    text-align: center;
+    color: white;
+    z-index: 2;
 }
 
 .slide-title {
-  font-size: 3rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .slide-description {
-  font-size: 1.2rem;
-  max-width: 600px;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    font-size: 1.2rem;
+    max-width: 600px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 /* Navigation Arrows */
 .nav-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  color: white;
-  font-size: 2rem;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 10;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    font-size: 2rem;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
 }
 
 .nav-arrow:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: translateY(-50%) scale(1.1);
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-50%) scale(1.1);
 }
 
 .nav-arrow.prev {
-  left: 20px;
+    left: 20px;
 }
 
 .nav-arrow.next {
-  right: 20px;
+    right: 20px;
 }
 
 /* Navigation Dots */
 .nav-dots {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 10px;
-  z-index: 10;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
 }
 
 .dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.5);
-  cursor: pointer;
-  transition: all 0.3s ease;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .dot.active {
-  background: white;
-  transform: scale(1.2);
+    background: white;
+    transform: scale(1.2);
 }
 
 .dot:hover {
-  background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.8);
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .slider-wrapper {
-    height: 400px;
-  }
+    .slider-wrapper {
+        height: 400px;
+    }
 
-  .slide-title {
-    font-size: 2rem;
-  }
+    .slide-title {
+        font-size: 2rem;
+    }
 
-  .slide-description {
-    font-size: 1rem;
-    padding: 0 20px;
-  }
+    .slide-description {
+        font-size: 1rem;
+        padding: 0 20px;
+    }
 
-  .nav-arrow {
-    width: 50px;
-    height: 50px;
-    font-size: 1.5rem;
-  }
+    .nav-arrow {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
 
-  .nav-arrow.prev {
-    left: 10px;
-  }
+    .nav-arrow.prev {
+        left: 10px;
+    }
 
-  .nav-arrow.next {
-    right: 10px;
-  }
+    .nav-arrow.next {
+        right: 10px;
+    }
 }
 
 @media (max-width: 480px) {
-  .slider-wrapper {
-    height: 300px;
-  }
+    .slider-wrapper {
+        height: 300px;
+    }
 
-  .slide-title {
-    font-size: 1.5rem;
-  }
+    .slide-title {
+        font-size: 1.5rem;
+    }
+}
+
+/* === Jumbotron Slider Styles === */
+.slide {
+    transition: opacity 1s ease-in-out;
+}
+
+.nav-arrow {
+    transition: all 0.3s ease;
+}
+
+.nav-arrow:hover {
+    transform: translateY(-50%) scale(1.1);
+}
+
+.dot.active {
+    background-color: white;
+    transform: scale(1.2);
+}
+
+.dot {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot:hover {
+    transform: scale(1.1);
+}
+
+/* Responsive adjustments for slider */
+@media (max-width: 768px) {
+    .nav-arrow {
+        padding: 0.5rem;
+    }
+
+    .nav-arrow i {
+        font-size: 1rem;
+    }
+
+    .nav-dots {
+        bottom: 1rem;
+    }
 }

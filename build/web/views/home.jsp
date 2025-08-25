@@ -1,7 +1,7 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%> 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%> <%@ taglib
+uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> <%@ taglib
+uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> <%@ taglib
+uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,10 +10,15 @@
         <link rel="icon" type="image/x-icon" href="icon-title.ico" />
         <link rel="stylesheet" href="./assets/css/globals.css" />
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+            rel="stylesheet"
+        />
     </head>
     <body class="bg-muted min-h-screen flex flex-col justify-between">
         <jsp:include page="../inc/home/header.jsp" />
-        <div class="flex-1 flex-col gap-4 w-full flex max-w-7xl mx-auto mt-24 pb-24">
+        <jsp:include page="../inc/jumbotron.jsp" />
+        <div class="flex-1 flex-col gap-4 w-full flex max-w-7xl mx-auto mt-8 pb-24">
             <c:forEach var="category" items="${listCategories}">
                 <section class="category-section" data-category-id="${category.getId()}">
                     <header class="w-full bg-background p-4 rounded-t-lg border-b border-gray-200">
@@ -134,11 +139,38 @@
                                                 test="${product.getQuantity() > 0 && product.isStatus()}"
                                             >
                                                 <form action="add-to-cart" method="post">
-                                                    <input type="hidden" name="id" value="${product.getId()}" />
-                                                    <input type="hidden" name="price" value="${product.getPrice()}" />
-                                                    <button type="submit"
-                                                        class="px-4 py-2.5 has-[>svg]:px-3 cursor-pointer border bg-background shadow-xs inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-xs font-medium [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none text-lg hover:bg-gray-50 transition-colors">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-plus-icon lucide-badge-plus"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><line x1="12" x2="12" y1="8" y2="16"/><line x1="8" x2="16" y1="12" y2="12"/></svg>
+                                                    <input
+                                                        type="hidden"
+                                                        name="id"
+                                                        value="${product.getId()}"
+                                                    />
+                                                    <input
+                                                        type="hidden"
+                                                        name="price"
+                                                        value="${product.getPrice()}"
+                                                    />
+                                                    <button
+                                                        type="submit"
+                                                        class="px-4 py-2.5 has-[>svg]:px-3 cursor-pointer border bg-background shadow-xs inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-xs font-medium [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none text-lg hover:bg-gray-50 transition-colors"
+                                                    >
+                                                        <svg
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            width="24"
+                                                            height="24"
+                                                            viewBox="0 0 24 24"
+                                                            fill="none"
+                                                            stroke="currentColor"
+                                                            stroke-width="2"
+                                                            stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            class="lucide lucide-badge-plus-icon lucide-badge-plus"
+                                                        >
+                                                            <path
+                                                                d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"
+                                                            />
+                                                            <line x1="12" x2="12" y1="8" y2="16" />
+                                                            <line x1="8" x2="16" y1="12" y2="12" />
+                                                        </svg>
                                                     </button>
                                                 </form>
                                             </c:if>
