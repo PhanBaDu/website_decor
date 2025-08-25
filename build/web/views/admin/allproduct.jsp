@@ -218,7 +218,7 @@ uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
         <!-- Modal chỉnh sửa sản phẩm -->
         <div
             id="editModal"
-            class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+            class="hidden fixed inset-0 bg-gray-950/60 bg-opacity-50 flex items-center justify-center z-50"
         >
             <div class="bg-white rounded-lg p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
                 <div class="flex justify-between items-center mb-4">
