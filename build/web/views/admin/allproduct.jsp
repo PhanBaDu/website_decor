@@ -53,7 +53,7 @@ uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
                                     <div class="relative">
                                         <img
                                             class="rounded-t-lg overflow-hidden h-54 w-full object-cover"
-                                            src="${pageContext.request.contextPath}/${product.getImage()}"
+                                            src="http://localhost:8686/website_decor/${product.getImage()}"
                                             alt="${product.getName()}"
                                         />
 
@@ -68,7 +68,7 @@ uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
                                     </div>
 
                                     <!-- Product Info -->
-                                    <div class="p-2">
+                                    <div class="p-2 h-52 flex flex-col justify-between">
                                         <!-- Product Name -->
                                         <h3
                                             class="font-semibold text-lg text-gray-800 mb-2 line-clamp-2 text-sm"
@@ -138,7 +138,7 @@ uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
                                         <div class="flex gap-2">
                                             <a
                                                 href="${pageContext.request.contextPath}/admin/editproduct?id=${product.getId()}"
-                                                class="flex-1 inline-flex justify-center bg-blue-600 text-white text-center py-2 px-4 rounded-md hover:bg-blue-700 transition-colors text-sm font-medium"
+                                                class="flex-1 inline-flex justify-center bg-primary text-white text-center py-2 px-4 rounded-md hover:bg-blue-700 transition-colors text-sm font-medium"
                                             >
                                                 Chỉnh sửa
                                             </a>
