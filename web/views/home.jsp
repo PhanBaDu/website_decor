@@ -31,7 +31,7 @@
                             <c:if test="${category.getId() == product.getIdCategory()}">
                                 <c:set var="hasProducts" value="true" />
                                 <div
-                                    class="bg-white rounded-lg border overflow-hidden hover:shadow-lg transition-shadow"
+                                    class="bg-white rounded-lg border overflow-hidden hover:shadow-lg transition-shadow flex flex-col justify-between"
                                 >
                                     <!-- Product Image -->
                                     <div class="relative">

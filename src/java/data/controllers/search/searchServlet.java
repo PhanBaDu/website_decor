@@ -34,8 +34,7 @@ public class searchServlet extends HttpServlet {
         
         try {
             // Lấy tất cả sản phẩm
-            ProductDao productDao = Database.getProductsDao();
-            List<Product> allProducts = productDao.findAll();
+            List<Product> allProducts = Database.getProductsDao().findAll();
             
             // Lọc sản phẩm theo từ khóa tìm kiếm
             List<Product> searchResults = allProducts.stream()

@@ -13,7 +13,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/globals.css" />
         <script>
-            // Only show/hide the new category input. No validation.
             function toggleCategoryInput() {
                 const categorySelect = document.getElementById('categorySelect');
                 const newCategoryDiv = document.getElementById('newCategoryDiv');

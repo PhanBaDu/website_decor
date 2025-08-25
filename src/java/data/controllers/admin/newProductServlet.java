@@ -74,7 +74,7 @@ public class newProductServlet extends HttpServlet {
             
             if (newCategoryName != null && !newCategoryName.trim().isEmpty()) {
                 // Check if category name already exists (case-insensitive)
-                CategoryDao categoryDao = new CategoryImpl();
+                CategoryDao categoryDao = Database.getCategoriesDao();
                 if (categoryDao.existsByName(newCategoryName.trim())) {
                     request.setAttribute("error", "Danh mục '" + newCategoryName.trim() + "' đã tồn tại. Vui lòng chọn tên khác.");
                     doGet(request, response);
@@ -143,11 +143,6 @@ public class newProductServlet extends HttpServlet {
                     uploadDir.mkdirs();
                 }
                 
-                // Debug logging
-                System.out.println("DEBUG - webRootPath: " + webRootPath);
-                System.out.println("DEBUG - uploadPath: " + uploadPath);
-                System.out.println("DEBUG - uploadDir.exists(): " + uploadDir.exists());
-                
                 // Save file
                 String filePath = uploadPath + File.separator + uniqueFileName;
                 filePart.write(filePath);
@@ -170,7 +165,7 @@ public class newProductServlet extends HttpServlet {
             product.setIdCategory(idCategory);
             
             // Save product
-            ProductDao productDao = new ProductImpl();
+            ProductDao productDao = Database.getProductsDao();
             boolean success = productDao.create(product);
             
             if (success) {

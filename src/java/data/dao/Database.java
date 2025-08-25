@@ -6,7 +6,6 @@ import data.impl.ProductImpl;
 import data.impl.UserImpl;
 
 public interface Database {
-    
     public static UserDao getUserDao() {
         return new UserImpl();
     }
