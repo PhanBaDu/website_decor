@@ -158,52 +158,115 @@ uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
                 </c:choose>
             </div>
 
-                         <!-- Thanh toán -->
+            <!-- Thanh toán -->
              <div class="w-2/5 bg-background p-6 rounded-lg h-fit">
                  <h3 class="text-sm font-semibold mb-4">Thông tin thanh toán</h3>
  
+                 <!-- Form thông tin người nhận -->
+                 <form id="checkoutForm" method="POST" action="create-order" class="space-y-4 mb-6">
+                     <!-- Thông tin người nhận -->
+                     <div class="space-y-3">
+                         <div>
+                             <label for="shippingName" class="block text-xs text-muted-foreground mb-1">Họ và tên *</label>
+                             <input
+                                 type="text"
+                                 id="shippingName"
+                                 name="shippingName"
+                                 value="${sessionScope.user.name}"
+                                 required
+                                 class="w-full px-3 py-2 border border-border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                                 placeholder="Nhập họ và tên"
+                             />
+                         </div>
+                         
+                         <div>
+                             <label for="shippingPhone" class="block text-xs text-muted-foreground mb-1">Số điện thoại *</label>
+                             <input
+                                 type="tel"
+                                 id="shippingPhone"
+                                 name="shippingPhone"
+                                 value="${sessionScope.user.phone}"
+                                 required
+                                 class="w-full px-3 py-2 border border-border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                                 placeholder="Nhập số điện thoại"
+                             />
+                         </div>
+                         
+                         <div>
+                             <label for="shippingAddress" class="block text-xs text-muted-foreground mb-1">Địa chỉ giao hàng *</label>
+                             <textarea
+                                 id="shippingAddress"
+                                 name="shippingAddress"
+                                 required
+                                 rows="3"
+                                 class="w-full px-3 py-2 border border-border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
+                                 placeholder="Nhập địa chỉ giao hàng chi tiết"
+                             ></textarea>
+                         </div>
+                     </div>
+                     
+                     <!-- Phương thức thanh toán -->
+                     <div class="space-y-3">
+                         <h4 class="text-sm font-medium text-muted-foreground">Phương thức thanh toán</h4>
+                         <div class="flex items-center space-x-2 p-3 border border-border rounded-md bg-muted">
+                             <input
+                                 type="radio"
+                                 id="cod"
+                                 name="paymentMethod"
+                                 value="COD"
+                                 checked
+                                 class="text-primary focus:ring-primary"
+                             />
+                             <label for="cod" class="text-sm font-medium">Thanh toán khi nhận hàng (COD)</label>
+                         </div>
+                     </div>
+                      <!-- Tóm tắt đơn hàng -->
                  <div class="space-y-3 mb-6">
-                     <div class="flex justify-between text-sm">
-                         <span>Tạm tính:</span>
-                         <span id="subtotal">
-                             <fmt:formatNumber
-                                 value="${totalAmount}"
-                                 type="number"
-                                 pattern="#,###"
-                             />đ
-                         </span>
-                     </div>
-                     <div class="flex justify-between text-sm">
-                         <span>Phí vận chuyển:</span>
-                         <span id="shipping">
-                             <c:choose>
-                                 <c:when test="${cartCount > 0}">30,000đ</c:when>
-                                 <c:otherwise>0đ</c:otherwise>
-                             </c:choose>
-                         </span>
-                     </div>
-                     <hr class="my-2" />
-                     <div class="flex justify-between text-sm font-semibold">
-                         <span>Tổng cộng:</span>
-                         <span id="total">
-                             <c:choose>
-                                 <c:when test="${cartCount > 0}">
-                                     <fmt:formatNumber
-                                         value="${totalAmount + 30000}"
-                                         type="number"
-                                         pattern="#,###"
-                                     />đ
-                                 </c:when>
-                                 <c:otherwise>0đ</c:otherwise>
-                             </c:choose>
-                         </span>
+                     <h4 class="text-sm font-medium text-muted-foreground">Tóm tắt đơn hàng</h4>
+                     <div class="space-y-2">
+                         <div class="flex justify-between text-sm">
+                             <span>Tạm tính:</span>
+                             <span id="subtotal">
+                                 <fmt:formatNumber
+                                     value="${totalAmount}"
+                                     type="number"
+                                     pattern="#,###"
+                                 />đ
+                             </span>
+                         </div>
+                         <div class="flex justify-between text-sm">
+                             <span>Phí vận chuyển:</span>
+                             <span id="shipping">
+                                 <c:choose>
+                                     <c:when test="${cartCount > 0}">30,000đ</c:when>
+                                     <c:otherwise>0đ</c:otherwise>
+                                 </c:choose>
+                             </span>
+                         </div>
+                         <hr class="my-2" />
+                         <div class="flex justify-between text-sm font-semibold">
+                             <span>Tổng cộng:</span>
+                             <span id="total">
+                                 <c:choose>
+                                     <c:when test="${cartCount > 0}">
+                                         <fmt:formatNumber
+                                             value="${totalAmount + 30000}"
+                                             type="number"
+                                             pattern="#,###"
+                                         />đ
+                                     </c:when>
+                                     <c:otherwise>0đ</c:otherwise>
+                                 </c:choose>
+                             </span>
+                         </div>
                      </div>
                  </div>
  
+                 <!-- Nút đặt hàng -->
                  <div class="space-y-4">
                      <button
-                         type="button"
-                         id="checkoutBtn"
+                         type="submit"
+                         form="checkoutForm"
                          class="w-full bg-primary text-primary-foreground py-3 rounded-md font-medium hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
                          <c:if test="${cartCount == 0}">disabled</c:if>
                      >
@@ -216,9 +279,9 @@ uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
                          </a>
                      </div>
                  </div>
+                 </form>
              </div>
         </div>
-
         <!-- Thông báo -->
         <c:if test="${param.message == 'removed'}">
             <div class="fixed bottom-4 right-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg shadow-lg text-sm z-50 max-w-sm">
@@ -247,6 +310,36 @@ uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
                         <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
                     </svg>
                     <span>Có lỗi hệ thống xảy ra. Vui lòng thử lại!</span>
+                </div>
+            </div>
+        </c:if>
+        <c:if test="${param.error == 'missing_info'}">
+            <div class="fixed bottom-4 right-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg shadow-lg text-sm z-50 max-w-sm">
+                <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>Vui lòng điền đầy đủ thông tin giao hàng!</span>
+                </div>
+            </div>
+        </c:if>
+        <c:if test="${param.error == 'empty_cart'}">
+            <div class="fixed bottom-4 right-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg shadow-lg text-sm z-50 max-w-sm">
+                <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>Giỏ hàng trống, không thể đặt hàng!</span>
+                </div>
+            </div>
+        </c:if>
+        <c:if test="${param.error == 'order_failed'}">
+            <div class="fixed bottom-4 right-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg shadow-lg text-sm z-50 max-w-sm">
+                <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>Có lỗi xảy ra khi tạo đơn hàng. Vui lòng thử lại!</span>
                 </div>
             </div>
         </c:if>
