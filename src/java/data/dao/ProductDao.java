@@ -9,4 +9,6 @@ public interface ProductDao {
     public Product findById(int id);
     
     public boolean create(Product product);
+    
+    public boolean update(Product product);
 }

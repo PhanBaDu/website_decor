@@ -85,4 +85,24 @@ public class ProductImpl implements ProductDao{
             return false;
         }
     }
+    
+    @Override
+    public boolean update(Product product) {
+        String sql = "UPDATE products SET name = ?, image = ?, price = ?, quantity = ?, status = ?, id_category = ? WHERE id = ?";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, product.getName());
+            ps.setString(2, product.getImage());
+            ps.setDouble(3, product.getPrice());
+            ps.setInt(4, product.getQuantity());
+            ps.setBoolean(5, product.isStatus());
+            ps.setInt(6, product.getIdCategory());
+            ps.setInt(7, product.getId());
+            
+            int result = ps.executeUpdate();
+            return result > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
