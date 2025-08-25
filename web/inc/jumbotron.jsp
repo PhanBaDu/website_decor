@@ -1,33 +1,27 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="mt-24">
     <!-- Main Hero Image -->
-    <div class="relative overflow-hidden bg-background rounded-2xl shadow-2xl mb-8">
-        <div class="relative h-96 md:h-[500px]">
+    <div class="relative overflow-hidden bg-background mb-8">
+        <div class="relative h-96 md:h-[300px]">
             <img
-                src="./assets/images/decor1.png"
-                alt="Đồ trang trí nhà cửa"
+                src="./assets/images/hero.png"
+                alt="Background trang trí"
                 class="w-full h-full object-cover"
             />
-            <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+            <div class="absolute inset-0 bg-opacity-30"></div>
             <div class="absolute inset-0 flex items-center justify-center">
                 <div class="text-center text-white">
                     <h2 class="text-3xl md:text-5xl font-bold mb-4">Bộ Trang Trí Phòng Khách</h2>
                     <p class="text-lg md:text-xl mb-6 max-w-2xl">
                         Tạo điểm nhấn cho phòng khách với bộ trang trí hiện đại và sang trọng
                     </p>
-                    <a
-                        href="home"
-                        class="bg-foreground text-background px-6 py-3 rounded-full text-base font-semibold hover:bg-muted-foreground transition-all"
-                    >
-                        <i class="fas fa-shopping-cart mr-2"></i>Mua sắm ngay
-                    </a>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Image Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-6">
         <!-- Image 1 -->
         <div
             class="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
